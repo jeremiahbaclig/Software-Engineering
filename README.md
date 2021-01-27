@@ -1,1 +1,1 @@
-hello there ! :) -Kym
+Github repo that contains all Assignments for CEN4010.
