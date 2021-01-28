@@ -1,1 +1,1 @@
-Github repo that contains all Assignments for CEN4010.
+Github repo that contains all programming assignments for CEN4010.
