@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class Vector3DTest {
 
+    // WILL BE DELETED - just testing
     @Test
     public void testSampleMethod() {
         Vector3D testing = new Vector3D();
