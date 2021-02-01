@@ -2,3 +2,4 @@
 /.idea/
 /CodeFiles/src/cen4010/pa1/Main.java
 *.class
+/out/

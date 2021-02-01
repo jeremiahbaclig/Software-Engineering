@@ -8,4 +8,8 @@ public class Vector3D {
         System.out.println("5");
         return 5;
     }
+
+    public static void main(String args[]) {
+        System.out.println("hello");
+    }
 }
