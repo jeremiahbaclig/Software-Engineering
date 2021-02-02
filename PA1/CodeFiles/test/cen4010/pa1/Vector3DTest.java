@@ -25,7 +25,8 @@ class Vector3DTest {
 	 */
 	@Test
 	public void testScale() {
-		
+		Vector3D testScaleVector = new Vector3D(4.0, 5.0, 6.0);
+		assertEquals(new Vector3D(12.0, 15.0, 18.0).toString(), testScaleVector.scale(3.0).toString());
 	}
 	
 	@Test

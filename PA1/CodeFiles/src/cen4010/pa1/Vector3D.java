@@ -49,7 +49,10 @@ public class Vector3D {
 	}
 	
 	public String toString() {
-		return String.format(null, null);  // "for reasonable output"?
+	//	return String.format(null, null);  // "for reasonable output"?
+
+		// LINE BELOW WAS USED FOR THE UNIT TESTS SCALE, ADD, SUBTRACT; NOT THE FINAL METHOD IMPLEMENTATION
+		return "Resulting Vector: <" + this.x + ", " + this.y + ", " + this.z + ">";
 	}
 	
 	// implementation of equals - float and double arithmetic is not exact, thus, must allow for a tolerance
@@ -67,6 +70,6 @@ public class Vector3D {
 	}
 
     public static void main(String args[]) {
-        System.out.println("hello");
+       // System.out.println("hello");
     }
 }
