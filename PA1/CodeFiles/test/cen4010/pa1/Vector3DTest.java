@@ -38,7 +38,9 @@ class Vector3DTest {
 	
 	@Test
 	public void testSubtract() {  // simple tests
-		
+		Vector3D testSubtractVector = new Vector3D(10.0, 11.0, 12.0);
+		Vector3D vectorToSubtract = new Vector3D(6.0, 2.0, 5.0);
+		assertEquals(new Vector3D(4.0, 9.0, 7.0).toString(), testSubtractVector.subtract(vectorToSubtract).toString());
 	}
 	
 	@Test
