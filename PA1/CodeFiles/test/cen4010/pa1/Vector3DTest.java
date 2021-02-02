@@ -48,4 +48,9 @@ class Vector3DTest {
 		
 	}
 
+	@Test
+	public void testDot() {  // simple tests
+
+	}
+
 }
