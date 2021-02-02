@@ -44,7 +44,7 @@ class Vector3DTest {
 	}
 	
 	@Test
-	public void testMagnitute() {  // simple tests
+	public void testMagnitude() {  // simple tests
 		
 	}
 
