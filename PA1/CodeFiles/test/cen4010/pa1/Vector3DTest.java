@@ -4,7 +4,6 @@ package test.cen4010.pa1;
 // imports
 import org.junit.jupiter.api.Test;
 import src.cen4010.pa1.Vector3D;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class Vector3DTest {
@@ -26,17 +25,22 @@ class Vector3DTest {
 	 */
 	@Test
 	public void testScale() {
-		
+		Vector3D testScaleVector = new Vector3D(4.0, 5.0, 6.0);
+		assertEquals(new Vector3D(12.0, 15.0, 18.0).toString(), testScaleVector.scale(3.0).toString());
 	}
 	
 	@Test
 	public void testAdd() {  // simple tests
-		
+		Vector3D testAddVector = new Vector3D(4.0, 5.0, 6.0);
+		Vector3D vectorToAdd = new Vector3D(7.0, 8.0, 9.0);
+		assertEquals(new Vector3D(11.0, 13.0, 15.0).toString(), testAddVector.add(vectorToAdd).toString());
 	}
 	
 	@Test
 	public void testSubtract() {  // simple tests
-		
+		Vector3D testSubtractVector = new Vector3D(10.0, 11.0, 12.0);
+		Vector3D vectorToSubtract = new Vector3D(6.0, 2.0, 5.0);
+		assertEquals(new Vector3D(4.0, 9.0, 7.0).toString(), testSubtractVector.subtract(vectorToSubtract).toString());
 	}
 	
 	@Test
@@ -48,15 +52,10 @@ class Vector3DTest {
 	public void testMagnitude() {  // simple tests
 		
 	}
-	
-	
-    // WILL BE DELETED - just testing
-    @Test
-    public void testSampleMethod() {
-        Vector3D testing = new Vector3D();
-        int result = testing.sampleMethod();
 
-        assertEquals(5, result);
-    }
+	@Test
+	public void testDot() {  // simple tests
+
+	}
 
 }

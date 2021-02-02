@@ -2,7 +2,7 @@
 package src.cen4010.pa1;
 
 public class Vector3D {
-
+    // fields
 	private double x;
 	private double y;
 	private double z;
@@ -50,6 +50,9 @@ public class Vector3D {
 	
 	public String toString() {
 		return String.format(null, null);  // "for reasonable output"?
+
+		// LINE BELOW WAS USED FOR THE UNIT TESTS SCALE, ADD, SUBTRACT; NOT THE FINAL METHOD IMPLEMENTATION
+	//	return "Resulting Vector: <" + this.x + ", " + this.y + ", " + this.z + ">";
 	}
 	
 	// implementation of equals - float and double arithmetic is not exact, thus, must allow for a tolerance
@@ -65,14 +68,8 @@ public class Vector3D {
 		}
 		return false;
 	}
-	
-    // WILL BE DELETED - just testing
-    public int sampleMethod() {
-        System.out.println("5");
-        return 5;
-    }
 
     public static void main(String args[]) {
-        System.out.println("hello");
+       // System.out.println("hello");
     }
 }
