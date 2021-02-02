@@ -31,7 +31,9 @@ class Vector3DTest {
 	
 	@Test
 	public void testAdd() {  // simple tests
-		
+		Vector3D testAddVector = new Vector3D(4.0, 5.0, 6.0);
+		Vector3D vectorToAdd = new Vector3D(7.0, 8.0, 9.0);
+		assertEquals(new Vector3D(11.0, 13.0, 15.0).toString(), testAddVector.add(vectorToAdd).toString());
 	}
 	
 	@Test
