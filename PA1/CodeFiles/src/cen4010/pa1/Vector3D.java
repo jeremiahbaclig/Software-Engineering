@@ -47,12 +47,10 @@ public class Vector3D {
 	public double magnitude() {
 		return Math.sqrt(x*x + y*y + z*z);
 	}
-	
+
+	// return the output of the resulting vector
 	public String toString() {
 		return String.format("X: %.3f Y: %.3f Z: %.3f", this.x, this.y, this.z);
-
-		// LINE BELOW WAS USED FOR THE UNIT TESTS SCALE, ADD, SUBTRACT; NOT THE FINAL METHOD IMPLEMENTATION
-	//	return "Resulting Vector: <" + this.x + ", " + this.y + ", " + this.z + ">";
 	}
 	
 	// implementation of equals - float and double arithmetic is not exact, thus, must allow for a tolerance

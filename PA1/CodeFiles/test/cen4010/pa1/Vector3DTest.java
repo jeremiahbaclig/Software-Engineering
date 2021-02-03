@@ -26,7 +26,6 @@ class Vector3DTest {
 	/*
 	 * very similar to testEquals, and needs a working equals to test it. checking the unit scale as 
 	 * returning (a copy of) the same vector, and scaling by some value to make test multiplying each coordinate
-	 * 
 	 */
 	@Test
 	public void testScale() {
