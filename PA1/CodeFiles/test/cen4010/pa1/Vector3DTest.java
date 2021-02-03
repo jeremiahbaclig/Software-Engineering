@@ -10,12 +10,17 @@ class Vector3DTest {
 	
 	@Test
 	public void testToString() {
-		
+		Vector3D testStringVector = new Vector3D(3.7, 4.5, 5.0);
+		String value = "X: 3.700 Y: 4.500 Z: 5.000";
+		assertEquals(value, testStringVector.toString());
 	}
 	
 	@Test
 	public void testEquals() {  // very basic equality test, self-equality, equality to a different object, tests varying only one coordinate at a time.
+		Vector3D testEqualsVector = new Vector3D(3.7, 4.5, 5.0);
+		Vector3D testEqualsCheck = new Vector3D(3.7, 4.5, 5.0);
 		
+		assertEquals(true, testEqualsVector.equals(testEqualsCheck));
 	}
 	
 	/*
