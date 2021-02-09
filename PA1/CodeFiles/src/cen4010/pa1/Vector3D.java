@@ -2,7 +2,7 @@
 package src.cen4010.pa1;
 
 public class Vector3D {
-
+    // fields
 	private double x;
 	private double y;
 	private double z;
@@ -47,32 +47,23 @@ public class Vector3D {
 	public double magnitude() {
 		return Math.sqrt(x*x + y*y + z*z);
 	}
-	
+
+	// return the output of the resulting vector
 	public String toString() {
-		return String.format(null, null);  // "for reasonable output"?
+		return String.format("X: %.3f Y: %.3f Z: %.3f", this.x, this.y, this.z);
 	}
 	
 	// implementation of equals - float and double arithmetic is not exact, thus, must allow for a tolerance
 	public boolean equals(Vector3D v) {
-		if(Math.abs(v.x-this.x) < HUNDREDTHS){
-			return true;  
-		}
-		if(Math.abs(v.y-this.y) < HUNDREDTHS){
-			return true; 
-		}
-		if(Math.abs(v.z-this.z) < HUNDREDTHS){
-			return true; 
-		}
+		if(Math.abs(v.x-this.x) < HUNDREDTHS)
+			if(Math.abs(v.y-this.y) < HUNDREDTHS)
+				if(Math.abs(v.z-this.z) < HUNDREDTHS){
+					return true; 
+				}
 		return false;
 	}
-	
-    // WILL BE DELETED - just testing
-    public int sampleMethod() {
-        System.out.println("5");
-        return 5;
-    }
 
     public static void main(String args[]) {
-        System.out.println("hello");
+       // System.out.println("hello");
     }
 }
