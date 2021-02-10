@@ -48,18 +48,26 @@ class Vector3DTest {
 	}
 	
 	@Test
-	public void testNegate() {  // simple tests
-		
+	public void testNegate() {  // test to see if method properly changes the qualities of the vectors to negatives
+		Vector3D testNegateVector = new Vector3D(-3.0, -3.0, -3.0);
+		Vector3D vectortoNegate = new Vector3D(3.0, 3.0, 3.0);
+		assertEquals(testNegateVector.toString(), vectortoNegate.negate().toString());
 	}
 	
 	@Test
-	public void testMagnitude() {  // simple tests
-		
+	public void testMagnitude() {  // test to see if the magnitude can properly be extracted from vector
+		Vector3D testMagnitudeVector = new Vector3D(2.0, 2.0, 2.0);
+		// I could hard code the answer but I didn't want to risk messing up floats since they can be fussy
+		double testMagnitudeVal = Math.sqrt((2 * 2) + (2 * 2) + (2 * 2));
+		assertEquals(testMagnitudeVal, testMagnitudeVector.magnitude());
 	}
 
 	@Test
-	public void testDot() {  // simple tests
-
+	public void testDot() {  // test to see if the magnitude can properly be extracted from two different vectors
+		Vector3D testDotVector1 = new Vector3D(2.0, 2.0, 2.0);
+		Vector3D testDotVector2 = new Vector3D(4.0, 4.0, 4.0);
+		// Same reasoning behind the testMagnitude.
+		double testDotVal = ((2 * 4) + (2 * 4) + (2 * 4));
+		assertEquals(testDotVal, testDotVector1.dot(testDotVector2));
 	}
-
 }
