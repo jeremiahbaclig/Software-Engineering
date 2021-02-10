@@ -28,20 +28,20 @@ class Vector3DTest {
 	 * returning (a copy of) the same vector, and scaling by some value to make test multiplying each coordinate
 	 */
 	@Test
-	public void testScale() {
+	public void testScale() { // test to see if method properly scales the given vector by a value
 		Vector3D testScaleVector = new Vector3D(4.0, 5.0, 6.0);
 		assertEquals(new Vector3D(12.0, 15.0, 18.0).toString(), testScaleVector.scale(3.0).toString());
 	}
 	
 	@Test
-	public void testAdd() {  // simple tests
+	public void testAdd() {  // test to see if method properly adds two given vectors
 		Vector3D testAddVector = new Vector3D(4.0, 5.0, 6.0);
 		Vector3D vectorToAdd = new Vector3D(7.0, 8.0, 9.0);
 		assertEquals(new Vector3D(11.0, 13.0, 15.0).toString(), testAddVector.add(vectorToAdd).toString());
 	}
 	
 	@Test
-	public void testSubtract() {  // simple tests
+	public void testSubtract() {  // test to see if method properly subtracts two given vectors
 		Vector3D testSubtractVector = new Vector3D(10.0, 11.0, 12.0);
 		Vector3D vectorToSubtract = new Vector3D(6.0, 2.0, 5.0);
 		assertEquals(new Vector3D(4.0, 9.0, 7.0).toString(), testSubtractVector.subtract(vectorToSubtract).toString());
