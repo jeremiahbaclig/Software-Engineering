@@ -1,4 +1,22 @@
 PA1 - OVERVIEW
 
+TEAM MEMBERS: Jeremiah Baclig, Rural Young, Kymberlee Sables
+
+
+INTERESTING CLASS RELATIONSHIPS, DESIGN APPROACHES, PROBLEMS/SOLUTIONS:
+
+
+
+TEAM MEMBER CONTRIBUTIONS:
+Jeremiah -
+Rural -
+Kymberlee - worked on JUnit test cases for testScale, testAdd, and testSubtract
+
+
+TIME SPENT:
+Jeremiah -
+Rural -
+Kymberlee - approx. 30 min.
+
 
 
