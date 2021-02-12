@@ -4,17 +4,19 @@ TEAM MEMBERS: Jeremiah Baclig, Rural Young, Kymberlee Sables
 
 
 INTERESTING CLASS RELATIONSHIPS, DESIGN APPROACHES, PROBLEMS/SOLUTIONS:
-
+Interesting to implement an override for the equals method due to float/double accuracy.
+Issues with JUnit setup when pulling due to incorrect setup (Jeremiah). Resolved through
+reviewing the lecture and double-checking the setup of the example code.
 
 
 TEAM MEMBER CONTRIBUTIONS:
-Jeremiah -
+Jeremiah - worked on test cases for toString and Equals. Wrote and confirmed Vector3D class
 Rural -
 Kymberlee - worked on JUnit test cases for testScale, testAdd, and testSubtract
 
 
 TIME SPENT:
-Jeremiah -
+Jeremiah - approximately 1 hour (due to set-up and git research)
 Rural -
 Kymberlee - approx. 30 min.
 
