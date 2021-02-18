@@ -11,13 +11,13 @@ reviewing the lecture and double-checking the setup of the example code.
 
 TEAM MEMBER CONTRIBUTIONS:
 Jeremiah - worked on test cases for toString and Equals. Wrote and confirmed Vector3D class
-Rural -
+Rural - worked on JUnit test cases for testNegate, testMagnitude, and testDot
 Kymberlee - worked on JUnit test cases for testScale, testAdd, and testSubtract
 
 
 TIME SPENT:
 Jeremiah - approximately 1 hour (due to set-up and git research)
-Rural -
+Rural - approx. 1 hour (Setting up Eclipse was hard :c)
 Kymberlee - approx. 30 min.
 
 
