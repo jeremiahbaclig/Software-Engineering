@@ -8,6 +8,7 @@ public class GridManager : MonoBehaviour
     public GameObject line;
     public GameObject xButton;
     public GameObject oButton;
+    public GameObject square;
     private SpriteRenderer rend;
 
     bool unplayed = true;
