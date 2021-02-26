@@ -25,6 +25,7 @@ public class GridManager : MonoBehaviour
 
     void Update()
     {
+        Vector3 pos = new Vector3(0, 0, 0);
         if (Input.GetMouseButtonDown(0))
         {
             if(CastRay() != null)
@@ -32,19 +33,15 @@ public class GridManager : MonoBehaviour
                 int index = PlayerTurn();
                 if (index % 2 == 1) // player X
                 {
-                    if(CastRay().name == "x(Clone)")
-                    {
-                        rend = CastRay().GetComponent<SpriteRenderer>();
-                        rend.sortingOrder = 2;
-                    }
+                    rend = CastRay().GetComponent<SpriteRenderer>();
+                    pos = GameObject.Find(CastRay().name).transform.position;
+                    Instantiate(xButton, pos, Quaternion.identity);
                 }
                 else // player O
                 {
-                    if (CastRay().name == "o(Clone)")
-                    {
-                        rend = CastRay().GetComponent<SpriteRenderer>();
-                        rend.sortingOrder = 2;
-                    }
+                    rend = CastRay().GetComponent<SpriteRenderer>();
+                    pos = GameObject.Find(CastRay().name).transform.position;
+                    Instantiate(oButton, pos, Quaternion.identity);
                 }
             }
         }
@@ -73,19 +70,10 @@ public class GridManager : MonoBehaviour
         {
             for (int j = -1; j < n - 1; j++)
             {
-                Instantiate(xButton, new Vector3(i, j, 0), Quaternion.identity);
-                rend = xButton.GetComponent<SpriteRenderer>();
-                rend.sortingOrder = 0;
-            }
-        }
-
-        for (int i = -1; i < m - 1; i++)
-        {
-            for (int j = -1; j < n - 1; j++)
-            {
-                Instantiate(oButton, new Vector3(i, j, 0), Quaternion.identity);
-                rend = oButton.GetComponent<SpriteRenderer>();
-                rend.sortingOrder = 0;
+                square = Instantiate(square, new Vector3(i, j, 0), Quaternion.identity);
+                square.name = i.ToString() + j.ToString();
+                rend = square.GetComponent<SpriteRenderer>();
+                rend.sortingOrder = -2;
             }
         }
     }
