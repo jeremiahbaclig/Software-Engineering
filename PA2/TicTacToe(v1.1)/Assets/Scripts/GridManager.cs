@@ -16,6 +16,8 @@ public class GridManager : MonoBehaviour
     private int n = 3;
     private int k = 3;
     private int turn = 0;
+    private const float FACTOR_SHAPE = 2.75F;
+    private const float FACTOR_LINE = 1.5F;
 
     private void Start()
     {
@@ -33,15 +35,23 @@ public class GridManager : MonoBehaviour
                 int index = PlayerTurn();
                 if (index % 2 == 1) // player X
                 {
-                    rend = CastRay().GetComponent<SpriteRenderer>();
-                    pos = GameObject.Find(CastRay().name).transform.position;
-                    Instantiate(xButton, pos, Quaternion.identity);
+                    if (CastRay().name.Contains("1") || CastRay().name.Contains("0"))
+                    {
+                        rend = CastRay().GetComponent<SpriteRenderer>();
+                        pos = GameObject.Find(CastRay().name).transform.position;
+                        GameObject.Find(CastRay().name).SetActive(false);
+                        Instantiate(xButton, pos, Quaternion.identity);
+                    }
                 }
                 else // player O
                 {
-                    rend = CastRay().GetComponent<SpriteRenderer>();
-                    pos = GameObject.Find(CastRay().name).transform.position;
-                    Instantiate(oButton, pos, Quaternion.identity);
+                    if (CastRay().name.Contains("1") || CastRay().name.Contains("0"))
+                    {
+                        rend = CastRay().GetComponent<SpriteRenderer>();
+                        pos = GameObject.Find(CastRay().name).transform.position;
+                        GameObject.Find(CastRay().name).SetActive(false);
+                        Instantiate(oButton, pos, Quaternion.identity);
+                    }
                 }
             }
         }
@@ -49,18 +59,19 @@ public class GridManager : MonoBehaviour
 
     private void Grid()
     {
-        int temp = m;
+        float temp = m;
         for (int i = 1; i < m; i++)
         {
             temp -= 2;
-            Instantiate(line, new Vector3(0, temp, 0), Quaternion.identity);
+            Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
+
         }
 
         temp = n;
         for (int i = 1; i < n; i++)
         {
             temp -= 2;
-            Instantiate(line, new Vector3(temp, 0, 0), Quaternion.Euler(0, 0, 90));
+            Instantiate(line, new Vector3(temp * FACTOR_LINE, 0, 0), Quaternion.Euler(0, 0, 90));
         }
     }
 
@@ -70,7 +81,7 @@ public class GridManager : MonoBehaviour
         {
             for (int j = -1; j < n - 1; j++)
             {
-                square = Instantiate(square, new Vector3(i, j, 0), Quaternion.identity);
+                square = Instantiate(square, new Vector3(i * FACTOR_SHAPE, j * FACTOR_SHAPE, 0), Quaternion.identity);
                 square.name = i.ToString() + j.ToString();
                 rend = square.GetComponent<SpriteRenderer>();
                 rend.sortingOrder = -2;
