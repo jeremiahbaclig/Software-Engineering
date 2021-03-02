@@ -128,7 +128,7 @@ public class GridManager : MonoBehaviour
                     square.name = i.ToString() + "," + j.ToString();
                 }
                 rend = square.GetComponent<SpriteRenderer>();
-                rend.sortingOrder = -2;
+                rend.sortingOrder = -3;
             }
         }
     }
