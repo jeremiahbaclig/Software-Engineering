@@ -32,46 +32,49 @@ public class GridManager : MonoBehaviour
         Vector3 pos = new Vector3(0, 0, 0);
         if (Input.GetMouseButtonDown(0))
         {
-            if(CastRay() != null)
+            if(CastRay() != null && CastRay().name.Contains(","))
             {
                 int index = PlayerTurn();
                 if (index % 2 == 1) // player X
                 {
-                    if (CastRay().name.Contains(","))
-                    {
-                        string name = CastRay().name;
+                    string name = CastRay().name;
 
-                        rend = CastRay().GetComponent<SpriteRenderer>();
-                        pos = GameObject.Find(name).transform.position;
-                        GameObject.Find(name).SetActive(false);
+                    rend = CastRay().GetComponent<SpriteRenderer>();
+                    pos = GameObject.Find(name).transform.position;
+                    GameObject.Find(name).SetActive(false);
 
-                        string[] coords = name.Split(',');
-                        boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
+                    string[] coords = name.Split(',');
+                    boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
+                    Debug.Log("X: " + coords[0] + " " + coords[1]);
 
-                        Instantiate(xButton, pos, Quaternion.identity);
-                    }
+                    Instantiate(xButton, pos, Quaternion.identity);       
                 }
-                else // player O
+                else if (index % 2 == 0) // player O
                 {
-                    if (CastRay().name.Contains(","))
-                    {
-                        string name = CastRay().name;
+                    string name = CastRay().name;
 
-                        rend = CastRay().GetComponent<SpriteRenderer>();
-                        pos = GameObject.Find(name).transform.position;
-                        GameObject.Find(name).SetActive(false);
+                    rend = CastRay().GetComponent<SpriteRenderer>();
+                    pos = GameObject.Find(name).transform.position;
+                    GameObject.Find(name).SetActive(false);
 
-                        string[] coords = name.Split(',');
-                        boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
+                    string[] coords = name.Split(',');
+                    boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
+                    Debug.Log("O: " + coords[0] + " " + coords[1]);
 
-                        Instantiate(oButton, pos, Quaternion.identity);
-                    }
+                    Instantiate(oButton, pos, Quaternion.identity);
                 }
             }
         }
+
         gameOver = GetBoardState();
         if(gameOver == true)
         {
+            GameObject[] objectsList = GameObject.FindGameObjectsWithTag("Player");
+            for (int i=0; i< objectsList.Length; i++)
+            {
+                GameObject.Find(objectsList[i].name).SetActive(false);
+            }
+
             if (winner == 1)
             {
                 Debug.Log("X WINS");
@@ -135,7 +138,7 @@ public class GridManager : MonoBehaviour
         boardState = new int[rows, cols];
     }
 
-    private bool GetBoardState()
+    public bool GetBoardState()
     {
         int counter = 0;
         for (int i = 0; i < m; i++) // check rows
@@ -259,9 +262,10 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        if(counter == (m * n) - 1)
+        if(counter == (m * n))
         {
             winner = -99;
+            return true;
         }
 
         return false;
