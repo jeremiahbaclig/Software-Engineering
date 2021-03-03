@@ -9,6 +9,8 @@ public class GameTimer : MonoBehaviour
     float startTime = 60;
     [SerializeField] Text gameTimer;
     bool timerUnPaused = true;
+    public GameObject pausePopUp;
+
 
     void Start() {
         currentTime = startTime;
@@ -26,12 +28,8 @@ public class GameTimer : MonoBehaviour
     }
 
     public void PauseTimer() {
-        timerUnPaused = false;
-    }
+        timerUnPaused = !timerUnPaused;
 
-    public void Resume() {
-        timerUnPaused = true;
     }
-
 
 }
