@@ -80,41 +80,31 @@ public class GridManager : MonoBehaviour
 
     //Functions for the players turns
     //This function is called for Player X's turn
-    public void PlayerX(Vector3 pos)
+    public void PlayerX(Vector3 pos, string name)
     {
-        string name = CastRay().name;
-
-        rend = CastRay().GetComponent<SpriteRenderer>();
-        pos = GameObject.Find(name).transform.position;
-        
         //Sets the position to be unclickable
         GameObject.Find(name).SetActive(false);
 
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
 
-        Debug.Log("X: " + coords[0] + " " + coords[1]);
-        Debug.Log("Clicked position: " + pos);
+        /*Debug.Log("X: " + coords[0] + " " + coords[1]);
+        Debug.Log("Clicked position: " + pos);*/
 
         Instantiate(xButton, pos, Quaternion.identity);
     }
 
     //This function is called for Player Y's turn
-    public void PlayerY(Vector3 pos)
+    public void PlayerY(Vector3 pos, string name)
     {
-        string name = CastRay().name;
-
-        rend = CastRay().GetComponent<SpriteRenderer>();
-        pos = GameObject.Find(name).transform.position;
-        
         //Sets the position to be unclickable
         GameObject.Find(name).SetActive(false);
 
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
 
-        Debug.Log("O: " + coords[0] + " " + coords[1]);
-        Debug.Log("Clicked position: " + pos);
+        /*Debug.Log("O: " + coords[0] + " " + coords[1]);
+        Debug.Log("Clicked position: " + pos);*/
 
         Instantiate(oButton, pos, Quaternion.identity);
     }
@@ -274,7 +264,7 @@ public class GridManager : MonoBehaviour
         return null;
     }
 
-    void CheckWin(bool winStatus)
+    public void CheckWin(bool winStatus)
     {
         if (winStatus == true)
         {
@@ -313,13 +303,20 @@ public class GridManager : MonoBehaviour
                 //To keep track of the turns
                 int index = PlayerTurn();
 
+                //For the objects on the screen
+                String name = CastRay().name;
+                pos = GameObject.Find(name).transform.position;
+
+                Debug.Log("name: " + name);
+                Debug.Log("pos: " + pos);
+
                 if (index % 2 == 1) // player X
                 {
-                    PlayerX(pos);    
+                    PlayerX(pos, name);    
                 }
                 else if (index % 2 == 0) // player O
                 {
-                    PlayerY(pos);
+                    PlayerY(pos, name);
                 }
             }
         }
