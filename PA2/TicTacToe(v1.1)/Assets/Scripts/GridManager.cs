@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GridManager : MonoBehaviour
 {
@@ -20,74 +21,13 @@ public class GridManager : MonoBehaviour
     private const float FACTOR_SHAPE = 2.75F;
     private const float FACTOR_LINE = 1.5F;
 
+
+    //The functions for the initial game start up
     private void Start()
     {
         Grid();
         Players();
         SetBoardState(m, n);
-    }
-
-    void Update()
-    {
-        Vector3 pos = new Vector3(0, 0, 0);
-        if (Input.GetMouseButtonDown(0))
-        {
-            if(CastRay() != null && CastRay().name.Contains(","))
-            {
-                int index = PlayerTurn();
-                if (index % 2 == 1) // player X
-                {
-                    string name = CastRay().name;
-
-                    rend = CastRay().GetComponent<SpriteRenderer>();
-                    pos = GameObject.Find(name).transform.position;
-                    GameObject.Find(name).SetActive(false);
-
-                    string[] coords = name.Split(',');
-                    boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
-                    Debug.Log("X: " + coords[0] + " " + coords[1]);
-
-                    Instantiate(xButton, pos, Quaternion.identity);       
-                }
-                else if (index % 2 == 0) // player O
-                {
-                    string name = CastRay().name;
-
-                    rend = CastRay().GetComponent<SpriteRenderer>();
-                    pos = GameObject.Find(name).transform.position;
-                    GameObject.Find(name).SetActive(false);
-
-                    string[] coords = name.Split(',');
-                    boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
-                    Debug.Log("O: " + coords[0] + " " + coords[1]);
-
-                    Instantiate(oButton, pos, Quaternion.identity);
-                }
-            }
-        }
-
-        gameOver = GetBoardState();
-        if(gameOver == true)
-        {
-            GameObject[] objectsList = GameObject.FindGameObjectsWithTag("Player");
-            for (int i=0; i< objectsList.Length; i++)
-            {
-                GameObject.Find(objectsList[i].name).SetActive(false);
-            }
-
-            if (winner == 1)
-            {
-                Debug.Log("X WINS");
-            }
-            else if(winner == -1)
-            {
-                Debug.Log("O WINS");
-            }
-            else if(winner == -99)
-            {
-                Debug.Log("TIE");
-            }
-        }
     }
 
     private void Grid()
@@ -97,7 +37,6 @@ public class GridManager : MonoBehaviour
         {
             temp -= 2;
             Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
-
         }
 
         temp = n;
@@ -114,7 +53,7 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < n; j++)
             {
-                square = Instantiate(square, new Vector3((i-1) * FACTOR_SHAPE, (j-1) * FACTOR_SHAPE, 0), Quaternion.identity);
+                square = Instantiate(square, new Vector3((i - 1) * FACTOR_SHAPE, (j - 1) * FACTOR_SHAPE, 0), Quaternion.identity);
                 if (j == 0)
                 {
                     square.name = i.ToString() + "," + (j + (n - 1)).ToString();
@@ -138,12 +77,56 @@ public class GridManager : MonoBehaviour
         boardState = new int[rows, cols];
     }
 
-    public bool GetBoardState()
+
+    //Functions for the players turns
+    //This function is called for Player X's turn
+    public void PlayerX(Vector3 pos)
+    {
+        string name = CastRay().name;
+
+        rend = CastRay().GetComponent<SpriteRenderer>();
+        pos = GameObject.Find(name).transform.position;
+        
+        //Sets the position to be unclickable
+        GameObject.Find(name).SetActive(false);
+
+        string[] coords = name.Split(',');
+        boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
+
+        Debug.Log("X: " + coords[0] + " " + coords[1]);
+        Debug.Log("Clicked position: " + pos);
+
+        Instantiate(xButton, pos, Quaternion.identity);
+    }
+
+    //This function is called for Player Y's turn
+    public void PlayerY(Vector3 pos)
+    {
+        string name = CastRay().name;
+
+        rend = CastRay().GetComponent<SpriteRenderer>();
+        pos = GameObject.Find(name).transform.position;
+        
+        //Sets the position to be unclickable
+        GameObject.Find(name).SetActive(false);
+
+        string[] coords = name.Split(',');
+        boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
+
+        Debug.Log("O: " + coords[0] + " " + coords[1]);
+        Debug.Log("Clicked position: " + pos);
+
+        Instantiate(oButton, pos, Quaternion.identity);
+    }
+
+
+    //Function for checking the board states
+    public bool CheckBoardState()
     {
         int counter = 0;
         for (int i = 0; i < m; i++) // check rows
         {
-            for(int j = 0; j < n; j++)
+            for (int j = 0; j < n; j++)
             {
                 if (boardState[i, j] == -1)
                 {
@@ -154,12 +137,12 @@ public class GridManager : MonoBehaviour
                     counter--;
                 }
             }
-            if(counter == n)
+            if (counter == n)
             {
                 winner = -1;
                 return true;
             }
-            else if(counter == -n)
+            else if (counter == -n)
             {
                 winner = 1;
                 return true;
@@ -186,7 +169,7 @@ public class GridManager : MonoBehaviour
                 winner = -1;
                 return true;
             }
-            else if (counter == -m) 
+            else if (counter == -m)
             {
                 winner = 1;
                 return true;
@@ -211,7 +194,7 @@ public class GridManager : MonoBehaviour
                     }
                 }
             }
-            if (counter == m) 
+            if (counter == m)
             {
                 winner = -1;
                 return true;
@@ -227,7 +210,7 @@ public class GridManager : MonoBehaviour
 
         for (int i = 0; i < m; i++) // check counter-diag
         {
-            for (int j = n-1; j >= 0 ; j--)
+            for (int j = n - 1; j >= 0; j--)
             {
                 if (boardState[i, j] == -1)
                 {
@@ -262,7 +245,7 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-        if(counter == (m * n))
+        if (counter == (m * n))
         {
             winner = -99;
             return true;
@@ -271,6 +254,8 @@ public class GridManager : MonoBehaviour
         return false;
     }
 
+
+    //Function for keeping track of the turns
     public int PlayerTurn()
     {
         turn++;
@@ -287,5 +272,58 @@ public class GridManager : MonoBehaviour
             return hit.collider.gameObject;
         }
         return null;
+    }
+
+    void CheckWin(bool winStatus)
+    {
+        if (winStatus == true)
+        {
+            GameObject[] objectsList = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < objectsList.Length; i++)
+            {
+                GameObject.Find(objectsList[i].name).SetActive(false);
+            }
+
+            if (winner == 1)
+            {
+                Debug.Log("X WINS");
+            }
+            else if (winner == -1)
+            {
+                Debug.Log("O WINS");
+            }
+            else if (winner == -99)
+            {
+                Debug.Log("TIE");
+            }
+
+            SceneManager.LoadScene("Menu");
+        }
+    }
+
+    //Function for when the game is actually being played
+    void Update()
+    {
+        Vector3 pos = new Vector3(0, 0, 0);
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            if(CastRay() != null && CastRay().name.Contains(","))
+            {
+                //To keep track of the turns
+                int index = PlayerTurn();
+
+                if (index % 2 == 1) // player X
+                {
+                    PlayerX(pos);    
+                }
+                else if (index % 2 == 0) // player O
+                {
+                    PlayerY(pos);
+                }
+            }
+        }
+
+        CheckWin(CheckBoardState());
     }
 }
