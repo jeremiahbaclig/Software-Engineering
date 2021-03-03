@@ -8,6 +8,7 @@ public class GameTimer : MonoBehaviour
     float currentTime = 0;
     float startTime = 60;
     [SerializeField] Text gameTimer;
+    bool timerPaused = false;
 
     void Start() {
         currentTime = startTime;
@@ -20,6 +21,10 @@ public class GameTimer : MonoBehaviour
         if (currentTime <= 0) {
             currentTime = 0;
         }
+    }
+
+    public void pauseTimer() {
+        timerPaused = !timerPaused;
     }
 
 
