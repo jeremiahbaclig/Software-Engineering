@@ -8,15 +8,17 @@ public class GameTimer : MonoBehaviour
     float currentTime = 0;
     float startTime = 60;
     [SerializeField] Text gameTimer;
-    bool timerPaused = false;
+    bool timerPaused = true;
 
     void Start() {
         currentTime = startTime;
     }
 
     void Update() {
-        currentTime -= 1 * Time.deltaTime;
-        gameTimer.text = currentTime.ToString("0");
+        if (timerPaused) {
+            currentTime -= 1 * Time.deltaTime;
+            gameTimer.text = currentTime.ToString("0");
+        }
 
         if (currentTime <= 0) {
             currentTime = 0;
