@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameTimer : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class GameTimer : MonoBehaviour
     public void PauseTimer() {
         timerUnPaused = !timerUnPaused;
 
+    }
+
+    public void QuitCurrentGame() {
+        SceneManager.LoadScene("Menu");
     }
 
 }
