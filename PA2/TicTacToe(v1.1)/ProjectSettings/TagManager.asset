@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Line
+  - Respawn_X
   layers:
   - Default
   - TransparentFX

@@ -263,6 +263,7 @@ public class GridManager : MonoBehaviour
                 SceneManager.LoadScene("TieScene");
                 Debug.Log("TIE");
             }
+            
 
        //     SceneManager.LoadScene("Menu");
         }
