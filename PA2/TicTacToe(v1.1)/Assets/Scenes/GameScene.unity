@@ -556,7 +556,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTimer: {fileID: 888769543}
-  pausePopUp: {fileID: 0}
 --- !u!1 &594433758
 GameObject:
   m_ObjectHideFlags: 0

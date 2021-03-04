@@ -287,7 +287,7 @@ public class GridManager : MonoBehaviour
                 Debug.Log("TIE");
             }
 
-            SceneManager.LoadScene("Menu");
+       //     SceneManager.LoadScene("Menu");
         }
     }
 
