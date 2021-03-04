@@ -244,18 +244,21 @@ public class GridManager : MonoBehaviour
 
             if (winner == 1)
             {
+                SceneManager.LoadScene("XWinScene");
                 Debug.Log("X WINS");
             }
             else if (winner == -1)
             {
+                SceneManager.LoadScene("OWinScene");
                 Debug.Log("O WINS");
             }
             else if (winner == -99)
             {
+                SceneManager.LoadScene("TieScene");
                 Debug.Log("TIE");
             }
 
-            SceneManager.LoadScene("Menu");
+       //     SceneManager.LoadScene("Menu");
         }
     }
 
