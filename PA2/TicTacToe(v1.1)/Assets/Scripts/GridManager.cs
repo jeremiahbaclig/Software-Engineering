@@ -118,112 +118,80 @@ public class GridManager : MonoBehaviour
         {
             for (int j = 0; j < n; j++)
             {
-                if (boardState[i, j] == -1)
+                counter += boardState[i, j];
+                if (counter == n)
                 {
-                    counter++;
+                    winner = 1;
+                    return true;
                 }
-                else if (boardState[i, j] == 1)
+                else if (counter == -n)
                 {
-                    counter--;
+                    winner = -1;
+                    return true;
                 }
             }
-            if (counter == n)
-            {
-                winner = -1;
-                return true;
-            }
-            else if (counter == -n)
-            {
-                winner = 1;
-                return true;
-            }
-            else
-                counter = 0;
+            counter = 0;
         }
 
-        for (int i = 0; i < m; i++) // check cols
+        for (int i = 0; i < m; i++) // check rows
         {
             for (int j = 0; j < n; j++)
             {
-                if (boardState[j, i] == -1)
+                counter += boardState[j, i];
+                if (counter == m)
                 {
-                    counter++;
+                    winner = 1;
+                    return true;
                 }
-                else if (boardState[i, j] == 1)
+                else if (counter == -m)
                 {
-                    counter--;
+                    winner = -1;
+                    return true;
                 }
             }
-            if (counter == m) // need code for O win
-            {
-                winner = -1;
-                return true;
-            }
-            else if (counter == -m)
-            {
-                winner = 1;
-                return true;
-            }
-            else
-                counter = 0;
+            counter = 0;
         }
 
         for (int i = 0; i < m; i++) // check diag
         {
+            counter += boardState[i, i];
+            if (counter == (m + n) / 2)
+            {
+                winner = 1;
+                return true;
+            }
+            else if (counter == -((m + n) / 2))
+            {
+                winner = -1;
+                return true;
+            } 
+        }
+        counter = 0;
+
+        int counterDiag = 0;
+        for (int i = m-1; i >= 0; i--) // check counter-diag
+        {
             for (int j = 0; j < n; j++)
             {
-                if (i == j)
+                if (counterDiag == j)
                 {
-                    if (boardState[i, j] == -1)
-                    {
-                        counter++;
-                    }
-                    else if (boardState[i, j] == 1)
-                    {
-                        counter--;
-                    }
+                    counter += boardState[i, counterDiag];
+                    counterDiag += 100;
+                }
+                if (counter == (m + n) / 2)
+                {
+                    winner = 1;
+                    return true;
+                }
+                else if (counter == -((m + n) / 2))
+                {
+                    winner = -1;
+                    return true;
                 }
             }
-            if (counter == m)
-            {
-                winner = -1;
-                return true;
-            }
-            else if (counter == -m)
-            {
-                winner = 1;
-                return true;
-            }
-            else
-                counter = 0;
+            counterDiag -= 99;
         }
-
-        for (int i = 0; i < m; i++) // check counter-diag
-        {
-            for (int j = n - 1; j >= 0; j--)
-            {
-                if (boardState[i, j] == -1)
-                {
-                    counter++;
-                }
-                else if (boardState[i, j] == 1)
-                {
-                    counter--;
-                }
-            }
-            if (counter == m)
-            {
-                winner = -1;
-                return true;
-            }
-            else if (counter == -m)
-            {
-                winner = 1;
-                return true;
-            }
-            else
-                counter = 0;
-        }
+        counter = 0;
 
         for (int i = 0; i < m; i++) // check tie
         {
