@@ -7,10 +7,11 @@ public class EndGame : MonoBehaviour
 { 
      
    public void PlayAgain() {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("StartUpScene");
    }
 
    public void ReturnToMenu() {
         SceneManager.LoadScene("Menu");
    }
+
 }
