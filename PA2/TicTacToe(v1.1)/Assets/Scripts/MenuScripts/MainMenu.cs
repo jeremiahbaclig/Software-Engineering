@@ -14,4 +14,12 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("GameScene");
     }
 
+    public void StartUpMenu() {
+        SceneManager.LoadScene("StartUpScene");
+    }
+
+    public void GoBackToMenu() {
+        SceneManager.LoadScene("Menu");
+    }
+
 }

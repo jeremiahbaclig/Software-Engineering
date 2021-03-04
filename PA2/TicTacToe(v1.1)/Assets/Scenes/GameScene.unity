@@ -1115,7 +1115,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Continue
+  m_Text: 'No
+
+'
 --- !u!222 &1083696844
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1388,7 +1390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.39978}
+  m_AnchoredPosition: {x: 0, y: -0.39978027}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1281558807
@@ -1497,7 +1499,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Quit
+  m_Text: 'Yes
 
 '
 --- !u!222 &1423150392
@@ -2155,5 +2157,7 @@ MonoBehaviour:
   xButton: {fileID: 112371407836262616, guid: 1e23b85664ae3624a84e943617de2be0, type: 3}
   oButton: {fileID: 599059233425957933, guid: 0fda22ac790de3f47b0bb072dcfd27b6, type: 3}
   square: {fileID: 2605082611692441030, guid: 480e088f3481a524a92f01febf0fca20, type: 3}
+  rend: {fileID: 0}
+  start: {fileID: 0}
   gameOver: 0
   winner: 0
