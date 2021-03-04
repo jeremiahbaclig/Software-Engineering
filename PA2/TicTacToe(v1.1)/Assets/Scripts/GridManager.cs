@@ -9,12 +9,12 @@ public class GridManager : MonoBehaviour
     public GameObject xButton;
     public GameObject oButton;
     public GameObject square;
-    private SpriteRenderer rend;
+    public SpriteRenderer rend;
 
     private int m = 3;
     private int n = 3;
     private int k = 3;
-    int[,] boardState;
+    private int[,] boardState;
     public bool gameOver = false;
     public int winner = 0;
     private int turn = 0;
@@ -30,12 +30,13 @@ public class GridManager : MonoBehaviour
         SetBoardState(m, n);
     }
 
-    private void Grid()
+    public void Grid()
     {
         float temp = m;
         for (int i = 1; i < m; i++)
         {
             temp -= 2;
+
             Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
         }
 
@@ -43,6 +44,7 @@ public class GridManager : MonoBehaviour
         for (int i = 1; i < n; i++)
         {
             temp -= 2;
+
             Instantiate(line, new Vector3(temp * FACTOR_LINE, 0, 0), Quaternion.Euler(0, 0, 90));
         }
     }
@@ -66,13 +68,14 @@ public class GridManager : MonoBehaviour
                 {
                     square.name = i.ToString() + "," + j.ToString();
                 }
+
                 rend = square.GetComponent<SpriteRenderer>();
                 rend.sortingOrder = -3;
             }
         }
     }
 
-    private void SetBoardState(int rows, int cols)
+    public void SetBoardState(int rows, int cols)
     {
         boardState = new int[rows, cols];
     }
@@ -82,14 +85,18 @@ public class GridManager : MonoBehaviour
     //This function is called for Player X's turn
     public void PlayerX(Vector3 pos, string name)
     {
+        Debug.Log("pos: " + pos);
+        Debug.Log("name: " + name);
+
         //Sets the position to be unclickable
-        GameObject.Find(name).SetActive(false);
+        //GameObject.Find(name).SetActive(false);
 
         string[] coords = name.Split(',');
-        boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
+        //boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
 
         /*Debug.Log("X: " + coords[0] + " " + coords[1]);
         Debug.Log("Clicked position: " + pos);*/
+        
 
         Instantiate(xButton, pos, Quaternion.identity);
     }
@@ -286,8 +293,6 @@ public class GridManager : MonoBehaviour
             {
                 Debug.Log("TIE");
             }
-
-            SceneManager.LoadScene("Menu");
         }
     }
 
@@ -295,10 +300,10 @@ public class GridManager : MonoBehaviour
     void Update()
     {
         Vector3 pos = new Vector3(0, 0, 0);
-        
+
         if (Input.GetMouseButtonDown(0))
         {
-            if(CastRay() != null && CastRay().name.Contains(","))
+            if (CastRay() != null && CastRay().name.Contains(","))
             {
                 //To keep track of the turns
                 int index = PlayerTurn();
@@ -312,7 +317,7 @@ public class GridManager : MonoBehaviour
 
                 if (index % 2 == 1) // player X
                 {
-                    PlayerX(pos, name);    
+                    PlayerX(pos, name);
                 }
                 else if (index % 2 == 0) // player O
                 {
@@ -321,6 +326,19 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        CheckWin(CheckBoardState());
+        bool winCondition = CheckBoardState();
+
+        CheckWin(winCondition);
+
+        if (winCondition)
+        {
+            SceneManager.LoadScene("Menu");
+        }
+
+    }
+
+    public bool test()
+    {
+        return true;
     }
 }
