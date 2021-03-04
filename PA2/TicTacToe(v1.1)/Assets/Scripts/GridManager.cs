@@ -10,6 +10,7 @@ public class GridManager : MonoBehaviour
     public GameObject oButton;
     public GameObject square;
     public SpriteRenderer rend;
+    public CheckStarter start;
 
     private int m = 3;
     private int n = 3;
@@ -17,7 +18,6 @@ public class GridManager : MonoBehaviour
     int[,] boardState;
     public bool gameOver = false;
     public int winner = 0;
-    private int turn = 0;
     private const float FACTOR_SHAPE = 2.75F;
     private const float FACTOR_LINE = 1.5F;
 
@@ -222,8 +222,8 @@ public class GridManager : MonoBehaviour
     //Function for keeping track of the turns
     public int PlayerTurn()
     {
-        turn++;
-        return turn % 2;
+        CheckStarter.turn++;
+        return CheckStarter.turn % 2;
     }
 
     GameObject CastRay()
