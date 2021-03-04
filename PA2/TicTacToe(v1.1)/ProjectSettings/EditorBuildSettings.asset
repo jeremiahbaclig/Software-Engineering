@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TimerOutScene.unity
     guid: cedd5696a56f1f14d95b017fbbdc4e9a
+  - enabled: 1
+    path: Assets/Scenes/TieScene.unity
+    guid: fe033dac75966534fa1eaa904eaccaef
+  - enabled: 1
+    path: Assets/Scenes/PlayerWinScene.unity
+    guid: c4cd6616fa32cf944a75b5ddc7aeb928
   m_configObjects: {}
