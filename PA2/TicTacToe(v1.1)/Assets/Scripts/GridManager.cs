@@ -9,7 +9,7 @@ public class GridManager : MonoBehaviour
     public GameObject xButton;
     public GameObject oButton;
     public GameObject square;
-    private SpriteRenderer rend;
+    public SpriteRenderer rend;
 
     private int m = 3;
     private int n = 3;
@@ -23,7 +23,7 @@ public class GridManager : MonoBehaviour
 
 
     //The functions for the initial game start up
-    private void Start()
+    public void Start()
     {
         Grid();
         Players();
@@ -78,12 +78,18 @@ public class GridManager : MonoBehaviour
     }
 
 
+    void FindObject(string name)
+    {
+        GameObject.Find(name).SetActive(false);
+    }
+
     //Functions for the players turns
     //This function is called for Player X's turn
     public void PlayerX(Vector3 pos, string name)
     {
         //Sets the position to be unclickable
-        GameObject.Find(name).SetActive(false);
+
+        FindObject(name);
 
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
@@ -98,7 +104,7 @@ public class GridManager : MonoBehaviour
     public void PlayerY(Vector3 pos, string name)
     {
         //Sets the position to be unclickable
-        GameObject.Find(name).SetActive(false);
+        FindObject(name);
 
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
