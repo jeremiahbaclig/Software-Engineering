@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OWinScene.unity
     guid: b4888f19b5fcf8f4191e0abca5dd5b60
+  - enabled: 1
+    path: Assets/Scenes/MenuScenes/StartUpScene.unity
+    guid: 7795ca80527b9134b9efaf10c9d670b2
   m_configObjects: {}
