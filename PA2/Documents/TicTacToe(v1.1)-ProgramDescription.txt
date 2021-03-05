@@ -6,6 +6,27 @@ Running the game requires Unity to be installed.
 
 Downloading Unity to run the Game:
 
+1. Go to https://unity3d.com/get-unity/download and click "download Unity hub"
+
+2. Once downloaded, open Unity. On the leftmost column, click "Installs", click "add". Find and install
+   2019.4.21f1 (should be the recommended release)
+
+3. Once finished, click on "Projects" on the leftmost column and click "add". Find corresponding project folder
+   named TicTacToe(v1.1)
+
+4. After added, click to open the project
 
 
 Running the Game:
+
+1. Once the project has been open, navigate to the Assets folder located at the bottom.
+
+2. Navigate to the "Scenes" folder then the "MenuScenes" folder. Double click "Menu".
+
+3. Once the "Menu" scene appears, click the play button located near the top middle of the screen.
+
+4. This will allow interacting with the game.
+
+
+Running the Unit Tests:
+
