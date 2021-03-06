@@ -30,3 +30,10 @@ Running the Game:
 
 Running the Unit Tests:
 
+1. Click "Window" > "General" in the drop down menu > Then click "Test Runner"
+
+2. In the "Test Runner" window, select "PlayMode" in whioch you should see all the name of the various test cases.
+
+3). (Note: Ensure the game is not running for this step). Click "Run All" in the Test Runner window.
+
+4). A Red X will appear for failed cases and a Green Check will appear for passed cases.
