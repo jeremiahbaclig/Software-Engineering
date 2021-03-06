@@ -78,9 +78,19 @@ public class GridManager : MonoBehaviour
     }
 
 
-    void FindObject(string name)
+    void SetObjectFalse(string name)
     {
         GameObject.Find(name).SetActive(false);
+    }
+
+    public GameObject FindObject(string name)
+    {
+        return GameObject.Find(name);
+    }
+
+    public int[,] GetBoardState()
+    {
+        return boardState;
     }
 
     //Functions for the players turns
@@ -89,7 +99,7 @@ public class GridManager : MonoBehaviour
     {
         //Sets the position to be unclickable
 
-        FindObject(name);
+        SetObjectFalse(name);
 
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
@@ -101,10 +111,10 @@ public class GridManager : MonoBehaviour
     }
 
     //This function is called for Player Y's turn
-    public void PlayerY(Vector3 pos, string name)
+    public void PlayerO(Vector3 pos, string name)
     {
         //Sets the position to be unclickable
-        FindObject(name);
+        SetObjectFalse(name);
 
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
@@ -294,7 +304,7 @@ public class GridManager : MonoBehaviour
                 }
                 else if (index % 2 == 0) // player O
                 {
-                    PlayerY(pos, name);
+                    PlayerO(pos, name);
                 }
             }
         }

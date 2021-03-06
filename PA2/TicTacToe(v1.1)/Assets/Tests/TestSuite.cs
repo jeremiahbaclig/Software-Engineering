@@ -9,7 +9,7 @@ namespace Tests
     public class TestSuite
     {
         [UnityTest]
-        public IEnumerator WinVertical()
+        public IEnumerator TestWinVertical()
         {
             var game = new GameObject().AddComponent<GridManager>();
 
@@ -34,7 +34,7 @@ namespace Tests
         }
 
         [UnityTest]
-        public IEnumerator WinHorizontal()
+        public IEnumerator TestWinHorizontal()
         {
             var game = new GameObject().AddComponent<GridManager>();
 
@@ -59,7 +59,7 @@ namespace Tests
         }
 
         [UnityTest]
-        public IEnumerator WinDiagonal()
+        public IEnumerator TestWinDiagonal()
         {
             var game = new GameObject().AddComponent<GridManager>();
 
@@ -84,7 +84,7 @@ namespace Tests
         }
 
         [UnityTest]
-        public IEnumerator WinReverseDiagonal()
+        public IEnumerator TestWinReverseDiagonal()
         {
             var game = new GameObject().AddComponent<GridManager>();
 
@@ -104,6 +104,52 @@ namespace Tests
             game.PlayerX(pos3, "2,0");
 
             Assert.IsTrue(game.CheckBoardState());
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator TestIsX()
+        {
+            var game = new GameObject().AddComponent<GridManager>();
+
+            game.line = MonoBehaviour.Instantiate(Resources.Load<GameObject>("line"));
+            game.xButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("x"));
+            game.oButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("o"));
+            game.square = MonoBehaviour.Instantiate(Resources.Load<GameObject>("square"));
+
+            game.Start();
+
+            Vector3 pos1 = new Vector3((float)-2.8, (float)2.8, 0);
+
+            game.PlayerX(pos1, "0,2");
+
+            int[,] testBoard = game.GetBoardState();
+
+            Assert.AreEqual(1, testBoard[0,2]);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator TestIsO()
+        {
+            var game = new GameObject().AddComponent<GridManager>();
+
+            game.line = MonoBehaviour.Instantiate(Resources.Load<GameObject>("line"));
+            game.xButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("x"));
+            game.oButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("o"));
+            game.square = MonoBehaviour.Instantiate(Resources.Load<GameObject>("square"));
+
+            game.Start();
+
+            Vector3 pos1 = new Vector3((float)-2.8, (float)2.8, 0);
+
+            game.PlayerO(pos1, "0,2");
+
+            int[,] testBoard = game.GetBoardState();
+
+            Assert.AreEqual(-1, testBoard[0, 2]);
 
             yield return null;
         }
