@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 31a47176d5c2fae48acb38f87ce67f8f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - line: {fileID: 5106687242961366493, guid: bd982ad80d4821740ab188dd1ffbe6be, type: 3}
+  - xButton: {fileID: 112371407836262616, guid: 1e23b85664ae3624a84e943617de2be0,
+      type: 3}
+  - oButton: {fileID: 599059233425957933, guid: 0fda22ac790de3f47b0bb072dcfd27b6,
+      type: 3}
+  - square: {fileID: 2605082611692441030, guid: 480e088f3481a524a92f01febf0fca20,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
