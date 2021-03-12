@@ -12,14 +12,18 @@ public class GridManager : MonoBehaviour
     public SpriteRenderer rend;
     public CheckStarter start;
 
-    private int m = 3;
-    private int n = 3;
-    private int k = 3;
+    public int m = 3;
+    public int n = 3;
+    public int k = 3;
     int[,] boardState;
     public bool gameOver = false;
     public int winner = 0;
     private const float FACTOR_SHAPE = 2.75F;
-    private const float FACTOR_LINE = 1.5F;
+    private float FACTOR_LINE = 1.5F;
+
+    private float widthFactor;
+    private float widthAdjust = 1F;
+    private float lengthFactor = 1F;
 
 
     //The functions for the initial game start up
@@ -33,17 +37,49 @@ public class GridManager : MonoBehaviour
     private void Grid()
     {
         float temp = m;
+
+        AdjustBoard();
+
         for (int i = 1; i < m; i++)
         {
             temp -= 2;
-            Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
+            GameObject lineVertical = Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
+            
+            lineVertical.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
         }
 
         temp = n;
         for (int i = 1; i < n; i++)
         {
             temp -= 2;
-            Instantiate(line, new Vector3(temp * FACTOR_LINE, 0, 0), Quaternion.Euler(0, 0, 90));
+            GameObject lineHorizontal = Instantiate(line, new Vector3(temp * FACTOR_LINE, 0, 0), Quaternion.Euler(0, 0, 90));
+            lineHorizontal.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
+        }
+    }
+
+    private void AdjustBoard()
+    {
+        widthFactor = Math.Abs(2 - m);
+
+        if (m > 7)
+        {
+            FACTOR_LINE += 0.1F * (m / 3);
+        }
+        if (m > 12)
+        {
+            widthFactor -= 0.475F * (m - 12);
+        }
+        if (m > 14)
+        {
+            lengthFactor += .03F * (m - 14);
+        }
+        if (m > 13)
+        {
+            widthAdjust = 0.5F * (m - 13);
+        }
+        else
+        {
+            widthAdjust = 0;
         }
     }
 
