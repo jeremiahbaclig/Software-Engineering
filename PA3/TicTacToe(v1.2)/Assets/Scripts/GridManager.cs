@@ -11,10 +11,12 @@ public class GridManager : MonoBehaviour
     public GameObject square;
     public SpriteRenderer rend;
     public CheckStarter start;
+    public CameraAdjuster camera;
 
-    public int m = 3;
-    public int n = 3;
-    public int k = 3;
+    private int m = 20;
+    private int n = 20;
+    private int k = 3;
+
     int[,] boardState;
     public bool gameOver = false;
     public int winner = 0;
@@ -318,6 +320,8 @@ public class GridManager : MonoBehaviour
     //Function for when the game is actually being played
     void Update()
     {
+        camera.Adjust(m, n);
+
         Vector3 pos = new Vector3(0, 0, 0);
         
         if (Input.GetMouseButtonDown(0))

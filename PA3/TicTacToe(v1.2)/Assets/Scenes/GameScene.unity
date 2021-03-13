@@ -275,7 +275,7 @@ Transform:
   m_GameObject: {fileID: 63268500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.10221987, y: 0.30291092, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 999, y: 999, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -819,6 +819,7 @@ GameObject:
   - component: {fileID: 884117013}
   - component: {fileID: 884117012}
   - component: {fileID: 884117011}
+  - component: {fileID: 884117014}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -891,6 +892,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &884117014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 884117010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e145db6f683cb049b690d6694781434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &888769541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2159,5 +2172,6 @@ MonoBehaviour:
   square: {fileID: 2605082611692441030, guid: 480e088f3481a524a92f01febf0fca20, type: 3}
   rend: {fileID: 0}
   start: {fileID: 0}
+  camera: {fileID: 884117014}
   gameOver: 0
   winner: 0
