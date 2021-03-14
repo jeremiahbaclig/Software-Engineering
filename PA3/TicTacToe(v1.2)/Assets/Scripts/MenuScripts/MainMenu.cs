@@ -2,11 +2,10 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
-    GridManager gridClass = new GridManager();
-
     public void ExitGame() {
         Debug.Log("Exiting Game");
         Application.Quit();
@@ -28,6 +27,19 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("SinglePlayerStartUp");
     }
 
+    public void SubmitPressed()
+    {
+        if (GridManager.m < 3 || GridManager.n < 3 || GridManager.k < 3 ||
+                GridManager.m > 20 || GridManager.n > 20 || GridManager.n > 20)
+        {
+            EditorUtility.DisplayDialog("User Input Error!",
+                "Values must be between 3 and 20! (inclusive)", "OK", "Cancel");
+
+            SceneManager.LoadScene("Menu");
+            
+        }
+    }
+
     private void Update()
     {
         GameObject inputM = GameObject.Find("m");
@@ -40,14 +52,24 @@ public class MainMenu : MonoBehaviour
             string n = inputN.transform.GetChild(2).gameObject.GetComponent<Text>().text;
             string k = inputK.transform.GetChild(2).gameObject.GetComponent<Text>().text;
 
-            Debug.Log("m: " + m + " n: " + n + " k: " +  k);
-
-            gridClass.m = Int32.Parse(m);
-            gridClass.n = Int32.Parse(n);
-            gridClass.k = Int32.Parse(k);
+            GridManager.m = Int32.Parse(m);
+            GridManager.n = Int32.Parse(n);
+            GridManager.k = Int32.Parse(k);
         } catch (Exception ex)
         {
-            return;
+            if(ex is NullReferenceException) {
+                return;
+            }
+            else if(ex is FormatException)
+            {
+                GridManager.m = 99;
+                return;
+            }
+            else
+            {
+                Debug.Log(ex);
+                return;
+            }
         }
     }
 }

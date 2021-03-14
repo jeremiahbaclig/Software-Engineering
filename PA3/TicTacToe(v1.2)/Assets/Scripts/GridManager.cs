@@ -13,9 +13,9 @@ public class GridManager : MonoBehaviour
     public CheckStarter start;
     public CameraAdjuster camera;
 
-    public int m = 20;
-    public int n = 20;
-    public int k = 3;
+    public static int m = 20;
+    public static int n = 20;
+    public static int k = 3;
 
     int[,] boardState;
     public bool gameOver = false;
@@ -321,8 +321,6 @@ public class GridManager : MonoBehaviour
     void Update()
     {
         camera.Adjust(m, n);
-
-        Debug.Log("GRID_CLASS m: " + m + " n: " + n + " k: " + k);
 
         Vector3 pos = new Vector3(0, 0, 0);
         
