@@ -3,7 +3,6 @@ using System;
 
 public class CameraAdjuster : MonoBehaviour
 {
-    GridManager gridClass = new GridManager();
 
     void Start()
     {
