@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Line
   - Respawn_X
+  - Horizontal
+  - Vertical
   layers:
   - Default
   - TransparentFX

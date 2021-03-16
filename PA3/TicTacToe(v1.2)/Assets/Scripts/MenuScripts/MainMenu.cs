@@ -36,7 +36,6 @@ public class MainMenu : MonoBehaviour
                 "Values must be between 3 and 20! (inclusive)", "OK", "Cancel");
 
             SceneManager.LoadScene("Menu");
-            
         }
     }
 

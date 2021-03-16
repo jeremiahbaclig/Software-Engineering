@@ -45,17 +45,21 @@ public class GridManager : MonoBehaviour
         for (int i = 1; i < m; i++)
         {
             temp -= 2;
-            GameObject lineVertical = Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
-            
-            lineVertical.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
+            GameObject lineHorizontal = Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
+
+            lineHorizontal.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
+            lineHorizontal.name += " Horizontal";
+            lineHorizontal.tag = "Horizontal";
         }
 
         temp = n;
         for (int i = 1; i < n; i++)
         {
             temp -= 2;
-            GameObject lineHorizontal = Instantiate(line, new Vector3(temp * FACTOR_LINE, 0, 0), Quaternion.Euler(0, 0, 90));
-            lineHorizontal.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
+            GameObject lineVertical = Instantiate(line, new Vector3(temp * FACTOR_LINE, 0, 0), Quaternion.Euler(0, 0, 90));
+            lineVertical.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
+            lineVertical.name += " Vertical";
+            lineVertical.tag = "Vertical";
         }
     }
 
@@ -87,27 +91,55 @@ public class GridManager : MonoBehaviour
 
     private void Players()
     {
-        for (int i = 0; i < m; i++)
+        GameObject[] horizontals = FindObjectsTag("Horizontal");
+        Vector3 topLeft;
+
+        for (int i=0; i<horizontals.Length; i++)
         {
-            for (int j = 0; j < n; j++)
+            Debug.Log(horizontals[i].transform.position);
+        }
+
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i < m; i++)
             {
-                square = Instantiate(square, new Vector3((i - 1) * FACTOR_SHAPE, (j - 1) * FACTOR_SHAPE, 0), Quaternion.identity);
-                if (j == 0)
+                if(j != n - 1)
                 {
-                    square.name = i.ToString() + "," + (j + (n - 1)).ToString();
-                }
-                else if (j == n - 1)
-                {
-                    square.name = i.ToString() + "," + (j - (n - 1)).ToString();
+                    topLeft = LinePosition(horizontals[j]);
                 }
                 else
                 {
-                    square.name = i.ToString() + "," + j.ToString();
+                    topLeft = LinePosition(horizontals[j-1]);
                 }
+                
+                float lineLength = horizontals[0].GetComponent<Renderer>().bounds.size.x;
+                square = Instantiate(square, new Vector3(topLeft.x + (lineLength - lineLength + ((i * lineLength) / m)), topLeft.y), Quaternion.identity);
+
+                square.name = i.ToString() + "," + j.ToString();
+
+                float padding = square.GetComponent<Renderer>().bounds.size.x;
+
+                if (j == n - 1)
+                    square.transform.position = new Vector3(square.transform.position.x + 1.5F*padding - (m - i), square.transform.position.y - (n-0.75F)*padding);
+                else
+                    square.transform.position = new Vector3(square.transform.position.x + 1.5F * padding - (m - i), square.transform.position.y - (n-2.25F)*padding);
+
                 rend = square.GetComponent<SpriteRenderer>();
                 rend.sortingOrder = -3;
             }
         }
+
+    }
+
+    private Vector3 LinePosition(GameObject go)
+    {
+        float width = go.GetComponent<Renderer>().bounds.size.x;
+        float height = go.GetComponent<Renderer>().bounds.size.y;
+
+        Vector3 topLeft = go.transform.position;
+        topLeft.x -= width / 2;
+        topLeft.y += height / 2;
+
+        return topLeft;
     }
 
     private void SetBoardState(int rows, int cols)
@@ -124,6 +156,11 @@ public class GridManager : MonoBehaviour
     public GameObject FindObject(string name)
     {
         return GameObject.Find(name);
+    }
+
+    public GameObject[] FindObjectsTag(string tag)
+    {
+        return GameObject.FindGameObjectsWithTag(tag);
     }
 
     public int[,] GetBoardState()
@@ -146,6 +183,8 @@ public class GridManager : MonoBehaviour
         Debug.Log("Clicked position: " + pos);*/
 
         Instantiate(xButton, pos, Quaternion.identity);
+        rend = xButton.GetComponent<SpriteRenderer>();
+        rend.sortingOrder = 3;
     }
 
     //This function is called for Player Y's turn
@@ -161,6 +200,8 @@ public class GridManager : MonoBehaviour
         Debug.Log("Clicked position: " + pos);*/
 
         Instantiate(oButton, pos, Quaternion.identity);
+        rend = oButton.GetComponent<SpriteRenderer>();
+        rend.sortingOrder = 3;
     }
 
 
