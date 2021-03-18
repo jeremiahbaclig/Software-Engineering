@@ -64,7 +64,6 @@ public class GridManager : MonoBehaviour
         float height = border.GetComponent<Renderer>().bounds.size.y;
 
         Vector3 topLeft = new Vector3(x - length/2, y + height/ 2, 0);
-        Debug.Log(topLeft.x + " " + topLeft.y);
 
         for (int j = 0; j < n; j++) {
             for (int i = 0; i < m; i++)
@@ -321,10 +320,11 @@ public class GridManager : MonoBehaviour
                 name = x + "," + y;
                 pos = GameObject.Find(name).transform.position;
 
-                if (GameObject.Find(name).transform.position != null && GameObject.Find(name).activeSelf)
+                if (pos != null && GameObject.Find(name).activeSelf)
                 {
                     PlayerO(pos, name);
                     int index = PlayerTurn();
+                    Debug.Log("PLAYED: " + name + " now turn % 2 = " + index);
                     break;
                 }
             }
@@ -339,10 +339,11 @@ public class GridManager : MonoBehaviour
                 name = x + "," + y;
                 pos = GameObject.Find(name).transform.position;
 
-                if (GameObject.Find(name).transform.position != null && GameObject.Find(name).activeSelf)
+                if (pos != null && GameObject.Find(name).activeSelf)
                 {
                     PlayerX(pos, name);
                     int index = PlayerTurn();
+                    Debug.Log("PLAYED: " + name + " now turn % 2 = " + index);
                     break;
                 }
             }
@@ -358,9 +359,6 @@ public class GridManager : MonoBehaviour
                 //For the objects on the screen
                 String name = CastRay().name;
                 pos = GameObject.Find(name).transform.position;
-
-                Debug.Log("name: " + name);
-                Debug.Log("pos: " + pos);
 
                 if (index % 2 == 1) // player X
                 {
