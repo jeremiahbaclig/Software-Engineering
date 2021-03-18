@@ -126,6 +126,7 @@ public class GridManager : MonoBehaviour
 
         xButton = Instantiate(xButton, pos, Quaternion.identity);
         xButton.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+        xButton.name = name + " (X)";
 
         rend = xButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
@@ -145,6 +146,7 @@ public class GridManager : MonoBehaviour
 
         oButton = Instantiate(oButton, pos, Quaternion.identity);
         oButton.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+        oButton.name = name + " (O)";
 
         rend = oButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
@@ -320,16 +322,12 @@ public class GridManager : MonoBehaviour
                 name = x + "," + y;
                 pos = GameObject.Find(name).transform.position;
 
-                if (pos != null && GameObject.Find(name).activeSelf == true)
+                if (boardState[x, y] == 0)
                 {
                     PlayerO(pos, name);
                     int index = PlayerTurn();
                     Debug.Log("PLAYED: " + name + " now turn % 2 = " + index);
                     break;
-                }
-                else
-                {
-                    continue;
                 }
             }
         } else if (single && cpuStart)
@@ -346,16 +344,12 @@ public class GridManager : MonoBehaviour
                     name = x + "," + y;
                     pos = GameObject.Find(name).transform.position;
 
-                    if (pos != null && GameObject.Find(name).activeSelf == true)
+                    if (boardState[x, y] == 0)
                     {
                         Debug.Log("PLAYED: " + GameObject.Find(name));
                         PlayerX(pos, name);
                         int index = PlayerTurn();
                         break;
-                    }
-                    else
-                    {
-                        continue;
                     }
                 }
             }
