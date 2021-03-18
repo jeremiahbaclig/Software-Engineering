@@ -309,7 +309,7 @@ public class GridManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(0, 0, 0);
 
-        if (single && !cpuStart && CheckStarter.turn % 2 != 0)
+        if (single && !cpuStart && CheckStarter.turn % 2 == 0)
         {
             System.Random rnd = new System.Random();
 
@@ -320,31 +320,43 @@ public class GridManager : MonoBehaviour
                 name = x + "," + y;
                 pos = GameObject.Find(name).transform.position;
 
-                if (pos != null && GameObject.Find(name).activeSelf)
+                if (pos != null && GameObject.Find(name).activeSelf == true)
                 {
                     PlayerO(pos, name);
                     int index = PlayerTurn();
                     Debug.Log("PLAYED: " + name + " now turn % 2 = " + index);
                     break;
                 }
-            }
-        } else if (single && cpuStart && CheckStarter.turn % 2 == 0)
-        {
-            System.Random rnd = new System.Random();
-
-            while (true)
-            {
-                int x = rnd.Next(0, m);
-                int y = rnd.Next(0, n);
-                name = x + "," + y;
-                pos = GameObject.Find(name).transform.position;
-
-                if (pos != null && GameObject.Find(name).activeSelf)
+                else
                 {
-                    PlayerX(pos, name);
-                    int index = PlayerTurn();
-                    Debug.Log("PLAYED: " + name + " now turn % 2 = " + index);
-                    break;
+                    continue;
+                }
+            }
+        } else if (single && cpuStart)
+        {
+            if (CheckStarter.turn == 0)
+                CheckStarter.turn++;
+            if (CheckStarter.turn % 2 == 1) { 
+                System.Random rnd = new System.Random();
+
+                while (true)
+                {
+                    int x = rnd.Next(0, m);
+                    int y = rnd.Next(0, n);
+                    name = x + "," + y;
+                    pos = GameObject.Find(name).transform.position;
+
+                    if (pos != null && GameObject.Find(name).activeSelf == true)
+                    {
+                        Debug.Log("PLAYED: " + GameObject.Find(name));
+                        PlayerX(pos, name);
+                        int index = PlayerTurn();
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
             }
         }
@@ -354,19 +366,19 @@ public class GridManager : MonoBehaviour
             if(CastRay() != null && CastRay().name.Contains(",") && GameObject.Find(CastRay().name).activeSelf)
             {
                 //To keep track of the turns
-                int index = PlayerTurn();
-
                 //For the objects on the screen
                 String name = CastRay().name;
                 pos = GameObject.Find(name).transform.position;
 
-                if (index % 2 == 1) // player X
+                if (CheckStarter.turn % 2 == 1) // player X
                 {
                     PlayerX(pos, name);
+                    CheckStarter.turn++;
                 }
-                else if (index % 2 == 0) // player O
+                else if (CheckStarter.turn % 2 == 0) // player O
                 {
                     PlayerO(pos, name);
+                    CheckStarter.turn++;
                 }
             }
         }

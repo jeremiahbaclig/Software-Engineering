@@ -14,12 +14,12 @@ public class CheckStarter : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("Respawn")[0].GetComponent<Toggle>().isOn == true)
         {
-            turn = 1;
+            turn = 0;
             GridManager.cpuStart = true;
         }
         else if (GameObject.FindGameObjectsWithTag("Respawn_X")[0].GetComponent<Toggle>().isOn == true)
         {
-            turn = 0;
+            turn = 1;
             GridManager.cpuStart = false;
         }
     }
