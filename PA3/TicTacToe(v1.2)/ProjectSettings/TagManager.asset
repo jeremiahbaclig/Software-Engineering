@@ -8,6 +8,7 @@ TagManager:
   - Respawn_X
   - Horizontal
   - Vertical
+  - Border
   layers:
   - Default
   - TransparentFX

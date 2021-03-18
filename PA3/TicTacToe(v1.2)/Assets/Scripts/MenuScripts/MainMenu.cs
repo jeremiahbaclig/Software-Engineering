@@ -29,11 +29,11 @@ public class MainMenu : MonoBehaviour
 
     public void SubmitPressed()
     {
-        if (GridManager.m < 3 || GridManager.n < 3 || GridManager.k < 3 ||
-                GridManager.m > 20 || GridManager.n > 20 || GridManager.n > 20)
+        if (GridManager.m < 2 || GridManager.n < 2 || GridManager.k < 2 ||
+                GridManager.m > 50 || GridManager.n > 50 || GridManager.k > 50)
         {
             EditorUtility.DisplayDialog("User Input Error!",
-                "Values must be between 3 and 20! (inclusive)", "OK", "Cancel");
+                "Values must be between 2 and 50! (inclusive)", "OK", "Cancel");
 
             SceneManager.LoadScene("Menu");
         }

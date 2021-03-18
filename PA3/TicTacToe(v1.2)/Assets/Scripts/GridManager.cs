@@ -9,24 +9,18 @@ public class GridManager : MonoBehaviour
     public GameObject xButton;
     public GameObject oButton;
     public GameObject square;
+    public GameObject border;
     public SpriteRenderer rend;
     public CheckStarter start;
     public CameraAdjuster camera;
 
-    public static int m = 20;
-    public static int n = 20;
+    public static int m = 5;
+    public static int n = 5;
     public static int k = 3;
 
     int[,] boardState;
     public bool gameOver = false;
     public int winner = 0;
-    private const float FACTOR_SHAPE = 2.75F;
-    private float FACTOR_LINE = 1.5F;
-
-    private float widthFactor;
-    private float widthAdjust = 1F;
-    private float lengthFactor = 1F;
-
 
     //The functions for the initial game start up
     public void Start()
@@ -38,110 +32,58 @@ public class GridManager : MonoBehaviour
 
     private void Grid()
     {
-        float temp = m;
+        border = GameObject.FindGameObjectWithTag("Border");
+        float x = border.transform.position.x;
+        float y = border.transform.position.y;
+        float length = border.GetComponent<Renderer>().bounds.size.x;
+        float height = border.GetComponent<Renderer>().bounds.size.y;
 
-        AdjustBoard();
-
-        for (int i = 1; i < m; i++)
+        for(int i=1; i<m; i++)
         {
-            temp -= 2;
-            GameObject lineHorizontal = Instantiate(line, new Vector3(0, temp * FACTOR_LINE, 0), Quaternion.identity);
-
-            lineHorizontal.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
+            GameObject lineHorizontal = Instantiate(line, new Vector3(x - length / 4, (y + height / 2) - i*(height/m), 0), Quaternion.identity);
+            lineHorizontal.gameObject.transform.localScale = new Vector3(m*15, 0.25F, 0);
             lineHorizontal.name += " Horizontal";
             lineHorizontal.tag = "Horizontal";
         }
-
-        temp = n;
-        for (int i = 1; i < n; i++)
+        for (int j = 1; j < m; j++)
         {
-            temp -= 2;
-            GameObject lineVertical = Instantiate(line, new Vector3(temp * FACTOR_LINE, 0, 0), Quaternion.Euler(0, 0, 90));
-            lineVertical.gameObject.transform.localScale = new Vector3(lengthFactor * widthFactor, widthFactor - widthAdjust, 0);
+            GameObject lineVertical = Instantiate(line, new Vector3((x - length/2) + j *(height / n), (y + height / 2), 0), Quaternion.Euler(0, 0, 90));
+            lineVertical.gameObject.transform.localScale = new Vector3(n*15, 0.25F, 0);
             lineVertical.name += " Vertical";
             lineVertical.tag = "Vertical";
         }
     }
 
-    private void AdjustBoard()
-    {
-        widthFactor = Math.Abs(2 - m);
-
-        if (m > 7)
-        {
-            FACTOR_LINE += 0.1F * (m / 3);
-        }
-        if (m > 12)
-        {
-            widthFactor -= 0.475F * (m - 12);
-        }
-        if (m > 14)
-        {
-            lengthFactor += .03F * (m - 14);
-        }
-        if (m > 13)
-        {
-            widthAdjust = 0.5F * (m - 13);
-        }
-        else
-        {
-            widthAdjust = 0;
-        }
-    }
-
     private void Players()
     {
-        GameObject[] horizontals = FindObjectsTag("Horizontal");
-        Vector3 topLeft;
+        border = GameObject.FindGameObjectWithTag("Border");
+        float x = border.transform.position.x;
+        float y = border.transform.position.y;
+        float length = border.GetComponent<Renderer>().bounds.size.x;
+        float height = border.GetComponent<Renderer>().bounds.size.y;
 
-        for (int i=0; i<horizontals.Length; i++)
-        {
-            Debug.Log(horizontals[i].transform.position);
-        }
+        Vector3 topLeft = new Vector3(x - length/2, y + height/ 2, 0);
+        Debug.Log(topLeft.x + " " + topLeft.y);
 
         for (int j = 0; j < n; j++) {
             for (int i = 0; i < m; i++)
             {
-                if(j != n - 1)
-                {
-                    topLeft = LinePosition(horizontals[j]);
-                }
-                else
-                {
-                    topLeft = LinePosition(horizontals[j-1]);
-                }
-                
-                float lineLength = horizontals[0].GetComponent<Renderer>().bounds.size.x;
-                square = Instantiate(square, new Vector3(topLeft.x + (lineLength - lineLength + ((i * lineLength) / m)), topLeft.y), Quaternion.identity);
+                square = Instantiate(square, new Vector3(topLeft.x, topLeft.y, 0), Quaternion.identity);
+                square.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+
+                float paddingY = square.GetComponent<Renderer>().bounds.size.y;
+                float paddingX = square.GetComponent<Renderer>().bounds.size.x;
+
+                square.transform.position = new Vector3((topLeft.x + paddingX / 2) + paddingX * i, (topLeft.y - paddingY / 2) - paddingY * j, 0);
 
                 square.name = i.ToString() + "," + j.ToString();
-
-                float padding = square.GetComponent<Renderer>().bounds.size.x;
-
-                if (j == n - 1)
-                    square.transform.position = new Vector3(square.transform.position.x + 1.5F*padding - (m - i), square.transform.position.y - (n-0.75F)*padding);
-                else
-                    square.transform.position = new Vector3(square.transform.position.x + 1.5F * padding - (m - i), square.transform.position.y - (n-2.25F)*padding);
 
                 rend = square.GetComponent<SpriteRenderer>();
                 rend.sortingOrder = -3;
             }
         }
-
+        border.gameObject.transform.localScale = new Vector3(2.15F, 2.05F, 0);
     }
-
-    private Vector3 LinePosition(GameObject go)
-    {
-        float width = go.GetComponent<Renderer>().bounds.size.x;
-        float height = go.GetComponent<Renderer>().bounds.size.y;
-
-        Vector3 topLeft = go.transform.position;
-        topLeft.x -= width / 2;
-        topLeft.y += height / 2;
-
-        return topLeft;
-    }
-
     private void SetBoardState(int rows, int cols)
     {
         boardState = new int[rows, cols];
@@ -182,7 +124,9 @@ public class GridManager : MonoBehaviour
         /*Debug.Log("X: " + coords[0] + " " + coords[1]);
         Debug.Log("Clicked position: " + pos);*/
 
-        Instantiate(xButton, pos, Quaternion.identity);
+        xButton = Instantiate(xButton, pos, Quaternion.identity);
+        xButton.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+
         rend = xButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
     }
@@ -199,7 +143,9 @@ public class GridManager : MonoBehaviour
         /*Debug.Log("O: " + coords[0] + " " + coords[1]);
         Debug.Log("Clicked position: " + pos);*/
 
-        Instantiate(oButton, pos, Quaternion.identity);
+        oButton = Instantiate(oButton, pos, Quaternion.identity);
+        oButton.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+
         rend = oButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
     }
@@ -361,7 +307,7 @@ public class GridManager : MonoBehaviour
     //Function for when the game is actually being played
     void Update()
     {
-        camera.Adjust(m, n);
+        // camera.Adjust(m, n);
 
         Vector3 pos = new Vector3(0, 0, 0);
         
