@@ -12,11 +12,11 @@ public class GridManager : MonoBehaviour
     public GameObject border;
     public SpriteRenderer rend;
     public CheckStarter start;
-    public CameraAdjuster camera;
 
     public static int m = 5;
     public static int n = 5;
     public static int k = 3;
+    public static bool single = true;
 
     int[,] boardState;
     public bool gameOver = false;
@@ -45,7 +45,7 @@ public class GridManager : MonoBehaviour
             lineHorizontal.name += " Horizontal";
             lineHorizontal.tag = "Horizontal";
         }
-        for (int j = 1; j < m; j++)
+        for (int j = 1; j < n; j++)
         {
             GameObject lineVertical = Instantiate(line, new Vector3((x - length/2) + j *(height / n), (y + height / 2), 0), Quaternion.Euler(0, 0, 90));
             lineVertical.gameObject.transform.localScale = new Vector3(n*15, 0.25F, 0);
@@ -307,8 +307,6 @@ public class GridManager : MonoBehaviour
     //Function for when the game is actually being played
     void Update()
     {
-        // camera.Adjust(m, n);
-
         Vector3 pos = new Vector3(0, 0, 0);
         
         if (Input.GetMouseButtonDown(0))
@@ -336,6 +334,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        CheckWin(CheckBoardState());
+        if(m == n && m == k)
+            CheckWin(CheckBoardState());
     }
 }

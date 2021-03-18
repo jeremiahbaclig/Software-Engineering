@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartUpMenu() {
         SceneManager.LoadScene("StartUpScene");
+        GridManager.single = false;
     }
 
     public void GoBackToMenu() {
