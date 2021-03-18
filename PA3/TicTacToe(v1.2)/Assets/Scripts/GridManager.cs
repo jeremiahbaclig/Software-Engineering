@@ -300,17 +300,11 @@ public class GridManager : MonoBehaviour
                 SceneManager.LoadScene("TieScene");
                 Debug.Log("TIE");
             }
-            
-
-       //     SceneManager.LoadScene("Menu");
         }
     }
 
-    //Function for when the game is actually being played
-    void Update()
+    void EasyBot(Vector3 pos)
     {
-        Vector3 pos = new Vector3(0, 0, 0);
-
         if (single && !cpuStart && CheckStarter.turn % 2 == 0)
         {
             System.Random rnd = new System.Random();
@@ -330,11 +324,13 @@ public class GridManager : MonoBehaviour
                     break;
                 }
             }
-        } else if (single && cpuStart)
+        }
+        else if (single && cpuStart)
         {
             if (CheckStarter.turn == 0)
                 CheckStarter.turn++;
-            if (CheckStarter.turn % 2 == 1) { 
+            if (CheckStarter.turn % 2 == 1)
+            {
                 System.Random rnd = new System.Random();
 
                 while (true)
@@ -354,27 +350,40 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    void ClickAction(Vector3 pos)
+    {
+        if (CastRay() != null && CastRay().name.Contains(",") && !CastRay().name.Contains(")"))
+        {
+            //To keep track of the turns
+            //For the objects on the screen
+            String name = CastRay().name;
+            pos = GameObject.Find(name).transform.position;
+
+            if (CheckStarter.turn % 2 == 1) // player X
+            {
+                PlayerX(pos, name);
+                CheckStarter.turn++;
+            }
+            else if (CheckStarter.turn % 2 == 0) // player O
+            {
+                PlayerO(pos, name);
+                CheckStarter.turn++;
+            }
+        }
+    }
+
+    //Function for when the game is actually being played
+    void Update()
+    {
+        Vector3 pos = new Vector3(0, 0, 0);
+
+        EasyBot(pos);
         
         if (Input.GetMouseButtonDown(0))
         {
-            if(CastRay() != null && CastRay().name.Contains(",") && !CastRay().name.Contains(")"))
-            {
-                //To keep track of the turns
-                //For the objects on the screen
-                String name = CastRay().name;
-                pos = GameObject.Find(name).transform.position;
-
-                if (CheckStarter.turn % 2 == 1) // player X
-                {
-                    PlayerX(pos, name);
-                    CheckStarter.turn++;
-                }
-                else if (CheckStarter.turn % 2 == 0) // player O
-                {
-                    PlayerO(pos, name);
-                    CheckStarter.turn++;
-                }
-            }
+            ClickAction(pos);
         }
 
         if(m == n && m == k) // can remove this once uneven wins are implemented
