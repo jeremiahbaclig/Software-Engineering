@@ -17,6 +17,7 @@ public class GridManager : MonoBehaviour
     public static int n = 5;
     public static int k = 3;
     public static bool single = true;
+    public static bool cpuStart = false;
 
     int[,] boardState;
     public bool gameOver = false;
@@ -308,10 +309,48 @@ public class GridManager : MonoBehaviour
     void Update()
     {
         Vector3 pos = new Vector3(0, 0, 0);
+
+        if (single && !cpuStart && CheckStarter.turn % 2 != 0)
+        {
+            System.Random rnd = new System.Random();
+
+            while (true)
+            {
+                int x = rnd.Next(0, m);
+                int y = rnd.Next(0, n);
+                name = x + "," + y;
+                pos = GameObject.Find(name).transform.position;
+
+                if (GameObject.Find(name).transform.position != null && GameObject.Find(name).activeSelf)
+                {
+                    PlayerO(pos, name);
+                    int index = PlayerTurn();
+                    break;
+                }
+            }
+        } else if (single && cpuStart && CheckStarter.turn % 2 == 0)
+        {
+            System.Random rnd = new System.Random();
+
+            while (true)
+            {
+                int x = rnd.Next(0, m);
+                int y = rnd.Next(0, n);
+                name = x + "," + y;
+                pos = GameObject.Find(name).transform.position;
+
+                if (GameObject.Find(name).transform.position != null && GameObject.Find(name).activeSelf)
+                {
+                    PlayerX(pos, name);
+                    int index = PlayerTurn();
+                    break;
+                }
+            }
+        }
         
         if (Input.GetMouseButtonDown(0))
         {
-            if(CastRay() != null && CastRay().name.Contains(","))
+            if(CastRay() != null && CastRay().name.Contains(",") && GameObject.Find(CastRay().name).activeSelf)
             {
                 //To keep track of the turns
                 int index = PlayerTurn();
@@ -325,7 +364,7 @@ public class GridManager : MonoBehaviour
 
                 if (index % 2 == 1) // player X
                 {
-                    PlayerX(pos, name);    
+                    PlayerX(pos, name);
                 }
                 else if (index % 2 == 0) // player O
                 {
@@ -334,7 +373,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        if(m == n && m == k)
+        if(m == n && m == k) // can remove this once uneven wins are implemented
             CheckWin(CheckBoardState());
     }
 }

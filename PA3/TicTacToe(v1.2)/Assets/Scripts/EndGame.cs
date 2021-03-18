@@ -7,7 +7,7 @@ public class EndGame : MonoBehaviour
 { 
      
    public void PlayAgain() {
-        SceneManager.LoadScene("StartUpScene");
+        SceneManager.LoadScene("GameScene");
    }
 
    public void ReturnToMenu() {

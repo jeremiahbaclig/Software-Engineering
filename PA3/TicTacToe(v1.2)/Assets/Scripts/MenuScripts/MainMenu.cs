@@ -26,6 +26,7 @@ public class MainMenu : MonoBehaviour
 
     public void SinglePlayerStartUpMenu() {
         SceneManager.LoadScene("SinglePlayerStartUp");
+        GridManager.single = true;
     }
 
     public void SubmitPressed()
