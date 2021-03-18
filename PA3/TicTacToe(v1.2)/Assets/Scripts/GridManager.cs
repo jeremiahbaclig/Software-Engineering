@@ -357,7 +357,7 @@ public class GridManager : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0))
         {
-            if(CastRay() != null && CastRay().name.Contains(",") && GameObject.Find(CastRay().name).activeSelf)
+            if(CastRay() != null && CastRay().name.Contains(",") && !CastRay().name.Contains(")"))
             {
                 //To keep track of the turns
                 //For the objects on the screen
