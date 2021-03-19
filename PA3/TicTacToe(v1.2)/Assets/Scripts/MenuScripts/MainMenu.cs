@@ -39,6 +39,20 @@ public class MainMenu : MonoBehaviour
 
             SceneManager.LoadScene("Menu");
         }
+        else if (GridManager.k > GridManager.m || GridManager.k > GridManager.n)
+        {
+            EditorUtility.DisplayDialog("User Input Error!",
+                "K must be less than m or n!", "OK", "Cancel");
+
+            SceneManager.LoadScene("Menu");
+        }
+        else if (Math.Abs(GridManager.m - GridManager.n) > 10)
+        {
+            EditorUtility.DisplayDialog("User Input Error!",
+                "M and n are too far apart! This makes for a bad playing experience.", "OK", "Cancel");
+
+            SceneManager.LoadScene("Menu");
+        }
     }
 
     private void Update()

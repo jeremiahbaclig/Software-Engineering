@@ -65,11 +65,11 @@ public class GridManager : MonoBehaviour
 
         Vector3 topLeft = new Vector3(x - length/2, y + height/ 2, 0);
 
-        for (int j = 0; j < n; j++) {
-            for (int i = 0; i < m; i++)
+        for (int j = 0; j < m; j++) {
+            for (int i = 0; i < n; i++)
             {
                 square = Instantiate(square, new Vector3(topLeft.x, topLeft.y, 0), Quaternion.identity);
-                square.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+                square.gameObject.transform.localScale = new Vector3(2.0F / n, 2.0F / m, 0);
 
                 float paddingY = square.GetComponent<Renderer>().bounds.size.y;
                 float paddingX = square.GetComponent<Renderer>().bounds.size.x;
@@ -119,13 +119,13 @@ public class GridManager : MonoBehaviour
         SetObjectFalse(name);
 
         string[] coords = name.Split(',');
-        boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = 1;
+        boardState[Int32.Parse(coords[1]), Int32.Parse(coords[0])] = 1;
 
         /*Debug.Log("X: " + coords[0] + " " + coords[1]);
         Debug.Log("Clicked position: " + pos);*/
 
         xButton = Instantiate(xButton, pos, Quaternion.identity);
-        xButton.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+        xButton.gameObject.transform.localScale = new Vector3(2.0F / n, 2.0F / m, 0);
         xButton.name = name + " (X)";
 
         rend = xButton.GetComponent<SpriteRenderer>();
@@ -139,13 +139,13 @@ public class GridManager : MonoBehaviour
         SetObjectFalse(name);
 
         string[] coords = name.Split(',');
-        boardState[Int32.Parse(coords[0]), Int32.Parse(coords[1])] = -1;
+        boardState[Int32.Parse(coords[1]), Int32.Parse(coords[0])] = -1;
 
         /*Debug.Log("O: " + coords[0] + " " + coords[1]);
         Debug.Log("Clicked position: " + pos);*/
 
         oButton = Instantiate(oButton, pos, Quaternion.identity);
-        oButton.gameObject.transform.localScale = new Vector3(2.0F / m, 2.0F / n, 0);
+        oButton.gameObject.transform.localScale = new Vector3(2.0F / n, 2.0F / m, 0);
         oButton.name = name + " (O)";
 
         rend = oButton.GetComponent<SpriteRenderer>();
@@ -479,9 +479,9 @@ public class GridManager : MonoBehaviour
 
             while (true)
             {
-                int x = rnd.Next(0, m);
-                int y = rnd.Next(0, n);
-                name = x + "," + y;
+                int x = rnd.Next(0, n);
+                int y = rnd.Next(0, m);
+                name = y + "," + x;
                 pos = GameObject.Find(name).transform.position;
 
                 if (boardState[x, y] == 0)
@@ -503,9 +503,9 @@ public class GridManager : MonoBehaviour
 
                 while (true)
                 {
-                    int x = rnd.Next(0, m);
-                    int y = rnd.Next(0, n);
-                    name = x + "," + y;
+                    int x = rnd.Next(0, n);
+                    int y = rnd.Next(0, m);
+                    name = y + "," + x;
                     pos = GameObject.Find(name).transform.position;
 
                     if (boardState[x, y] == 0)
