@@ -153,11 +153,71 @@ public class GridManager : MonoBehaviour
     }
 
 
+    //These are for the CheckBoardStates
+
+    private bool checkDiag(int i, int j, ref int counter)
+    {
+        counter += 1;
+
+        //Try and see if the diagonal corners actually add up
+        try
+        {
+            if (boardState[i, j] != 0 && boardState[i, j] == boardState[i + 1, j + 1])
+            {
+                checkDiag(i + 1, j + 1, ref counter);
+            }
+        }
+        //If it does not, then return false since this assumes it reaches the corner.
+        catch
+        {
+            return false;
+        }
+
+        if (counter == k)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool checkCounterDiag(int i, int j, ref int counter)
+    {
+        counter += 1;
+
+        //Try and see if the diagonal corners actually add up
+        try
+        {
+            if (boardState[i, j] != 0 && boardState[i, j] == boardState[i + 1, j - 1])
+            {
+                checkCounterDiag(i + 1, j - 1, ref counter);
+            }
+        }
+
+        //If it does not, then return false since this assumes it reaches the corner.
+        catch
+        {
+            return false;
+        }
+
+        if (counter == k)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     //Function for checking the board states
     public bool CheckBoardState()
     {
         int counter = 0;
-        for (int i = 0; i < m; i++) // check rows
+
+        /*for (int i = 0; i < m; i++) // check rows
         {
             for (int j = 0; j < n; j++)
             {
@@ -174,28 +234,106 @@ public class GridManager : MonoBehaviour
                 }
             }
             counter = 0;
-        }
+        }*/
 
-        for (int i = 0; i < m; i++) // check rows
+        //Checking Vertically
+        for (int i = 0; i < m; i++)
         {
+            counter = 0;
+
             for (int j = 0; j < n; j++)
             {
-                counter += boardState[j, i];
-                if (counter == m)
+                //Optimization purposes
+                int currentSpace = boardState[i, j];
+
+                //Checks to see if the the space is empty or not a continuation, then resets the counter
+                if (counter > 0 && currentSpace != 1)
                 {
+                    Debug.Log("Line: " + i + " Space: " + j + " Counter had X's but encountered a non X");
+                    counter = 0;
+                }
+                else if (counter < 0 && currentSpace != -1)
+                {
+                    Debug.Log("Line: " + i + " Space: " + j + " Counter had Y's but encountered a non Y");
+                    counter = 0;
+                }
+
+                //checks to see if the space is an X or an O
+                if (currentSpace == 1)
+                {
+                    counter += 1;
+                    Debug.Log("Counter Added. It is now: " + counter);
+                }
+                else if (currentSpace == -1)
+                {
+                    counter -= 1;
+                    Debug.Log("Counter Subtracted. It is now: " + counter);
+                }
+
+                //Checks to see if the the space is empty or not a continuation, then resets the counter
+                if (counter == k)
+                {
+                    Debug.Log("Line: " + i + " Vertical Win for X!");
                     winner = 1;
                     return true;
                 }
-                else if (counter == -m)
+                else if (counter == -k)
                 {
+                    Debug.Log("Line: " + i + " Vertical Win for O!");
                     winner = -1;
                     return true;
                 }
             }
-            counter = 0;
         }
 
-        for (int i = 0; i < m; i++) // check diag
+        //Checking Horizontal
+        for (int j = 0; j < n; j++)
+        {
+            counter = 0;
+
+            for (int i = 0; i < m; i++)
+            {
+                //Optimization purposes
+                int currentSpace = boardState[i, j];
+
+                //Checks to see if the the space is empty or not a continuation, then resets the counter
+                if (counter > 0 && currentSpace != 1)
+                {
+                    counter = 0;
+
+                }
+                else if (counter < 0 && currentSpace != -1)
+                {
+                    counter = 0;
+                }
+
+                //checks to see if the space is an X or an O
+                if (currentSpace == 1)
+                {
+                    counter += 1;
+                }
+                else if (currentSpace == -1)
+                {
+                    counter -= 1;
+                }
+
+                //Checks to see if the the counter is at it's "Win Size"
+                if (counter == k)
+                {
+                    Debug.Log("Column: " + i + " Horizontal Win for X!");
+                    winner = 1;
+                    return true;
+                }
+                else if (counter == -k)
+                {
+                    Debug.Log("Column: " + i + " Horizontal Win for O!");
+                    winner = -1;
+                    return true;
+                }
+            }
+        }
+
+        /*for (int i = 0; i < m; i++) // check diag
         {
             counter += boardState[i, i];
             if (counter == (m + n) / 2)
@@ -208,10 +346,24 @@ public class GridManager : MonoBehaviour
                 winner = -1;
                 return true;
             } 
-        }
-        counter = 0;
+        }*/
 
-        int counterDiag = 0;
+        //check diagonal
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                counter = 0;
+                if (checkDiag(i, j, ref counter))
+                {
+                    Debug.Log("Starting at: " + i + "," + j + " Diagonal Win for " + boardState[i, j] + "!");
+                    winner = boardState[i,j];
+                    return true;
+                }
+            }
+        }
+
+        /*int counterDiag = 0;
         for (int i = m-1; i >= 0; i--) // check counter-diag
         {
             for (int j = 0; j < n; j++)
@@ -234,8 +386,24 @@ public class GridManager : MonoBehaviour
             }
             counterDiag -= 99;
         }
-        counter = 0;
+        counter = 0;*/
 
+        //check counter diag
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                counter = 0;
+                if (checkCounterDiag(i, j, ref counter))
+                {
+                    Debug.Log("Starting at: " + i + "," + j + " Counter Diagonal Win for " + boardState[i,j] + "!");
+                    winner = boardState[i,j];
+                    return true;
+                }
+            }
+        }
+
+        counter = 0;
         for (int i = 0; i < m; i++) // check tie
         {
             for (int j = 0; j < n; j++)
@@ -386,7 +554,6 @@ public class GridManager : MonoBehaviour
             ClickAction(pos);
         }
 
-        if(m == n && m == k) // can remove this once uneven wins are implemented
-            CheckWin(CheckBoardState());
+        CheckWin(CheckBoardState());
     }
 }
