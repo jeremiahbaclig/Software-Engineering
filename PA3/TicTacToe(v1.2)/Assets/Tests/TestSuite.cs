@@ -129,5 +129,53 @@ namespace Tests
 
             yield return null;
         }
+
+        [UnityTest]
+        public IEnumerator TestIsX()
+        {
+            var game = new GameObject().AddComponent<GridManager>();
+
+            game.line = MonoBehaviour.Instantiate(Resources.Load<GameObject>("line"));
+            game.xButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("x"));
+            game.oButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("o"));
+            game.square = MonoBehaviour.Instantiate(Resources.Load<GameObject>("square"));
+            game.border = MonoBehaviour.Instantiate(Resources.Load<GameObject>("border"));
+
+            game.Start();
+
+            Vector3 pos1 = new Vector3((float)-2.8, (float)2.8, 0);
+
+            game.PlayerX(pos1, "0,2");
+
+            int[,] testBoard = game.GetBoardState();
+
+            Assert.AreEqual(1, testBoard[2, 0]);
+
+            yield return null;
+        }
+
+        [UnityTest]
+        public IEnumerator TestIsO()
+        {
+            var game = new GameObject().AddComponent<GridManager>();
+
+            game.line = MonoBehaviour.Instantiate(Resources.Load<GameObject>("line"));
+            game.xButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("x"));
+            game.oButton = MonoBehaviour.Instantiate(Resources.Load<GameObject>("o"));
+            game.square = MonoBehaviour.Instantiate(Resources.Load<GameObject>("square"));
+            game.border = MonoBehaviour.Instantiate(Resources.Load<GameObject>("border"));
+
+            game.Start();
+
+            Vector3 pos1 = new Vector3((float)-2.8, (float)2.8, 0);
+
+            game.PlayerO(pos1, "0,2");
+
+            int[,] testBoard = game.GetBoardState();
+
+            Assert.AreEqual(-1, testBoard[2, 0]);
+
+            yield return null;
+        }
     }
 }
