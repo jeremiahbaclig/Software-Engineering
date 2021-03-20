@@ -122,8 +122,26 @@ public class GridManager : MonoBehaviour
         boardState[Int32.Parse(coords[1]), Int32.Parse(coords[0])] = 1;
 
         xButton = Instantiate(xButton, pos, Quaternion.identity);
-        xButton.gameObject.transform.localScale = new Vector3(2.0F, 2.0F, 0);
-        StartCoroutine(ScaleOverTime(0.25F, xButton));
+        if (Math.Max(m, n) > 40) // workaround for visual bug - scales to small sizes
+        {
+            xButton.gameObject.transform.localScale = new Vector3(0.7F, 0.7F, 0);
+            StartCoroutine(ScaleOverTime(0.5F, xButton));
+        }
+        else if (Math.Max(m, n) > 20)
+        {
+            xButton.gameObject.transform.localScale = new Vector3(1.0F, 1.0F, 0);
+            StartCoroutine(ScaleOverTime(0.4F, xButton));
+        }
+        else if (Math.Max(m, n) > 10)
+        {
+            xButton.gameObject.transform.localScale = new Vector3(1.5F, 1.5F, 0);
+            StartCoroutine(ScaleOverTime(0.3F, xButton));
+        }
+        else
+        {
+            xButton.gameObject.transform.localScale = new Vector3(2.0F, 2.0F, 0);
+            StartCoroutine(ScaleOverTime(0.25F, xButton));
+        }
         xButton.name = name + " (X)";
 
         rend = xButton.GetComponent<SpriteRenderer>();
@@ -140,8 +158,27 @@ public class GridManager : MonoBehaviour
         boardState[Int32.Parse(coords[1]), Int32.Parse(coords[0])] = -1;
 
         oButton = Instantiate(oButton, pos, Quaternion.identity);
-        oButton.gameObject.transform.localScale = new Vector3(2.0F, 2.0F, 0);
-        StartCoroutine(ScaleOverTime(0.25F, oButton));
+        if(Math.Max(m, n) > 40) // workaround for visual bug - scales to small sizes
+        {
+            oButton.gameObject.transform.localScale = new Vector3(0.7F, 0.7F, 0);
+            StartCoroutine(ScaleOverTime(0.5F, oButton));
+        }
+        else if (Math.Max(m, n) > 20)
+        {
+            oButton.gameObject.transform.localScale = new Vector3(1.0F, 1.0F, 0);
+            StartCoroutine(ScaleOverTime(0.4F, oButton));
+        }
+        else if (Math.Max(m, n) > 10)
+        {
+            oButton.gameObject.transform.localScale = new Vector3(1.5F, 1.5F, 0);
+            StartCoroutine(ScaleOverTime(0.3F, oButton));
+        }
+        else
+        {
+            oButton.gameObject.transform.localScale = new Vector3(2.0F, 2.0F, 0);
+            StartCoroutine(ScaleOverTime(0.25F, oButton));
+        }
+
         oButton.name = name + " (O)";
 
         rend = oButton.GetComponent<SpriteRenderer>();
