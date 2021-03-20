@@ -22,6 +22,7 @@ public class GameTimer : MonoBehaviour
         }
 
         if (currentTime <= 0) {
+            SoundManager.PlaySound("select_no");
             SceneManager.LoadScene("TimerOutScene");
         }
     }
@@ -32,6 +33,7 @@ public class GameTimer : MonoBehaviour
     }
 
     public void QuitCurrentGame() {
+        SoundManager.PlaySound("select_no");
         SceneManager.LoadScene("Menu");
     }
 

@@ -143,7 +143,7 @@ public class GridManager : MonoBehaviour
             StartCoroutine(ScaleOverTime(0.25F, xButton));
         }
         xButton.name = name + " (X)";
-
+        SoundManager.PlaySound("light_ding");
         rend = xButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
     }
@@ -180,7 +180,7 @@ public class GridManager : MonoBehaviour
         }
 
         oButton.name = name + " (O)";
-
+        SoundManager.PlaySound("dark_ding");
         rend = oButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
     }
@@ -442,16 +442,19 @@ public class GridManager : MonoBehaviour
 
             if (winner == 1)
             {
+                SoundManager.PlaySound("winner");
                 SceneManager.LoadScene("XWinScene");
                 Debug.Log("X WINS");
             }
             else if (winner == -1)
             {
+                SoundManager.PlaySound("winner");
                 SceneManager.LoadScene("OWinScene");
                 Debug.Log("O WINS");
             }
             else if (winner == -99)
             {
+                SoundManager.PlaySound("winner");
                 SceneManager.LoadScene("TieScene");
                 Debug.Log("TIE");
             }
