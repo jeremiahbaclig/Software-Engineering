@@ -9,6 +9,7 @@ TagManager:
   - Horizontal
   - Vertical
   - Border
+  - Particle
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEditor;
 using System;
+using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class GridManager : MonoBehaviour
@@ -10,6 +10,7 @@ public class GridManager : MonoBehaviour
     public GameObject oButton;
     public GameObject square;
     public GameObject border;
+    public Particles particle;
     public SpriteRenderer rend;
     public CheckStarter start;
 
@@ -111,22 +112,18 @@ public class GridManager : MonoBehaviour
         return boardState;
     }
 
-    //Functions for the players turns
     //This function is called for Player X's turn
     public void PlayerX(Vector3 pos, string name)
     {
         //Sets the position to be unclickable
-
         SetObjectFalse(name);
 
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[1]), Int32.Parse(coords[0])] = 1;
 
-        /*Debug.Log("X: " + coords[0] + " " + coords[1]);
-        Debug.Log("Clicked position: " + pos);*/
-
         xButton = Instantiate(xButton, pos, Quaternion.identity);
-        xButton.gameObject.transform.localScale = new Vector3(2.0F / n, 2.0F / m, 0);
+        xButton.gameObject.transform.localScale = new Vector3(2.0F, 2.0F, 0);
+        StartCoroutine(ScaleOverTime(0.25F, xButton));
         xButton.name = name + " (X)";
 
         rend = xButton.GetComponent<SpriteRenderer>();
@@ -142,17 +139,28 @@ public class GridManager : MonoBehaviour
         string[] coords = name.Split(',');
         boardState[Int32.Parse(coords[1]), Int32.Parse(coords[0])] = -1;
 
-        /*Debug.Log("O: " + coords[0] + " " + coords[1]);
-        Debug.Log("Clicked position: " + pos);*/
-
         oButton = Instantiate(oButton, pos, Quaternion.identity);
-        oButton.gameObject.transform.localScale = new Vector3(2.0F / n, 2.0F / m, 0);
+        oButton.gameObject.transform.localScale = new Vector3(2.0F, 2.0F, 0);
+        StartCoroutine(ScaleOverTime(0.25F, oButton));
         oButton.name = name + " (O)";
 
         rend = oButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
     }
 
+    IEnumerator ScaleOverTime(float time, GameObject button)
+    {
+        Vector3 originalScale = button.transform.localScale;
+        Vector3 destinationScale = new Vector3(2.0F / n, 2.0F / m, 0);
+
+        float currentTime = 0.0f;
+        do
+        {
+            button.transform.localScale = Vector3.Lerp(originalScale, destinationScale, currentTime / time);
+            currentTime += Time.deltaTime;
+            yield return null;
+        } while (currentTime <= time);
+    }
 
     //These are for the CheckBoardStates
 
@@ -217,25 +225,6 @@ public class GridManager : MonoBehaviour
     public bool CheckBoardState()
     {
         int counter = 0;
-
-        /*for (int i = 0; i < m; i++) // check rows
-        {
-            for (int j = 0; j < n; j++)
-            {
-                counter += boardState[i, j];
-                if (counter == n)
-                {
-                    winner = 1;
-                    return true;
-                }
-                else if (counter == -n)
-                {
-                    winner = -1;
-                    return true;
-                }
-            }
-            counter = 0;
-        }*/
 
         //Checking Vertically
         for (int i = 0; i < m; i++)
@@ -334,21 +323,6 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        /*for (int i = 0; i < m; i++) // check diag
-        {
-            counter += boardState[i, i];
-            if (counter == (m + n) / 2)
-            {
-                winner = 1;
-                return true;
-            }
-            else if (counter == -((m + n) / 2))
-            {
-                winner = -1;
-                return true;
-            } 
-        }*/
-
         //check diagonal
         for (int i = 0; i < m; i++)
         {
@@ -363,31 +337,6 @@ public class GridManager : MonoBehaviour
                 }
             }
         }
-
-        /*int counterDiag = 0;
-        for (int i = m-1; i >= 0; i--) // check counter-diag
-        {
-            for (int j = 0; j < n; j++)
-            {
-                if (counterDiag == j)
-                {
-                    counter += boardState[i, counterDiag];
-                    counterDiag += 100;
-                }
-                if (counter == (m + n) / 2)
-                {
-                    winner = 1;
-                    return true;
-                }
-                else if (counter == -((m + n) / 2))
-                {
-                    winner = -1;
-                    return true;
-                }
-            }
-            counterDiag -= 99;
-        }
-        counter = 0;*/
 
         //check counter diag
         for (int i = 0; i < m; i++)
@@ -489,7 +438,7 @@ public class GridManager : MonoBehaviour
                 {
                     PlayerO(pos, name);
                     int index = PlayerTurn();
-                    Debug.Log("PLAYED: " + name + " now turn % 2 = " + index);
+                    particle.PlayEffectsRed(pos);
                     break;
                 }
             }
@@ -511,9 +460,9 @@ public class GridManager : MonoBehaviour
 
                     if (boardState[x, y] == 0)
                     {
-                        Debug.Log("PLAYED: " + GameObject.Find(name));
                         PlayerX(pos, name);
                         int index = PlayerTurn();
+                        particle.PlayEffectsBlue(pos);
                         break;
                     }
                 }
@@ -532,11 +481,13 @@ public class GridManager : MonoBehaviour
 
             if (CheckStarter.turn % 2 == 1) // player X
             {
+                particle.PlayEffectsBlue(pos);
                 PlayerX(pos, name);
                 CheckStarter.turn++;
             }
             else if (CheckStarter.turn % 2 == 0) // player O
             {
+                particle.PlayEffectsRed(pos);
                 PlayerO(pos, name);
                 CheckStarter.turn++;
             }
