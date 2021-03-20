@@ -84,6 +84,7 @@ public class GridManager : MonoBehaviour
         }
         border.gameObject.transform.localScale = new Vector3(2.15F, 2.05F, 0);
     }
+
     private void SetBoardState(int rows, int cols)
     {
         boardState = new int[rows, cols];
