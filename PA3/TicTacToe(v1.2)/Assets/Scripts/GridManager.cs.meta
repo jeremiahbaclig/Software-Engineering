@@ -11,6 +11,10 @@ MonoImporter:
       type: 3}
   - square: {fileID: 2605082611692441030, guid: 480e088f3481a524a92f01febf0fca20,
       type: 3}
+  - border: {fileID: 7264118957535927401, guid: 3ce8fd61cd54d3b498372f2901b0b38f,
+      type: 3}
+  - rend: {instanceID: 0}
+  - start: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
