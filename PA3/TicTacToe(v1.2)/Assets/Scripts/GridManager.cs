@@ -143,7 +143,16 @@ public class GridManager : MonoBehaviour
             StartCoroutine(ScaleOverTime(0.25F, xButton));
         }
         xButton.name = name + " (X)";
-        SoundManager.PlaySound("light_ding");
+
+        try
+        {
+            SoundManager.PlaySound("light_ding");
+        }
+        catch (ArgumentNullException e)
+        {
+            Debug.Log(e);
+        }
+
         rend = xButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
     }
@@ -180,7 +189,16 @@ public class GridManager : MonoBehaviour
         }
 
         oButton.name = name + " (O)";
-        SoundManager.PlaySound("dark_ding");
+
+        try
+        {
+            SoundManager.PlaySound("dark_ding");
+        }
+        catch (ArgumentNullException e)
+        {
+            Debug.Log(e);
+        }
+
         rend = oButton.GetComponent<SpriteRenderer>();
         rend.sortingOrder = 3;
     }
@@ -478,7 +496,16 @@ public class GridManager : MonoBehaviour
                 {
                     PlayerO(pos, name);
                     int index = PlayerTurn();
-                    particle.PlayEffectsRed(pos);
+
+                    try
+                    {
+                        particle.PlayEffectsRed(pos);
+                    }
+                    catch
+                    {
+
+                    }
+
                     break;
                 }
             }
@@ -502,7 +529,16 @@ public class GridManager : MonoBehaviour
                     {
                         PlayerX(pos, name);
                         int index = PlayerTurn();
-                        particle.PlayEffectsBlue(pos);
+
+                        try
+                        {
+                            particle.PlayEffectsBlue(pos);
+                        }
+                        catch
+                        {
+
+                        }
+
                         break;
                     }
                 }
@@ -521,13 +557,27 @@ public class GridManager : MonoBehaviour
 
             if (CheckStarter.turn % 2 == 1) // player X
             {
-                particle.PlayEffectsBlue(pos);
+                try
+                {
+                    particle.PlayEffectsBlue(pos);
+                }
+                catch
+                {
+
+                }
                 PlayerX(pos, name);
                 CheckStarter.turn++;
             }
             else if (CheckStarter.turn % 2 == 0) // player O
             {
-                particle.PlayEffectsRed(pos);
+                try
+                {
+                    particle.PlayEffectsRed(pos);
+                }
+                catch
+                {
+
+                }
                 PlayerO(pos, name);
                 CheckStarter.turn++;
             }
