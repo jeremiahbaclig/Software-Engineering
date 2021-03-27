@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MenuScenes/Menu.unity
+    guid: 509d4d5ff560e04449b8a9c0d806e5a8
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/TimerOutScene.unity
+    guid: cedd5696a56f1f14d95b017fbbdc4e9a
+  - enabled: 1
+    path: Assets/Scenes/TieScene.unity
+    guid: fe033dac75966534fa1eaa904eaccaef
+  - enabled: 1
+    path: Assets/Scenes/XWinScene.unity
+    guid: c4cd6616fa32cf944a75b5ddc7aeb928
+  - enabled: 1
+    path: Assets/Scenes/OWinScene.unity
+    guid: b4888f19b5fcf8f4191e0abca5dd5b60
+  - enabled: 1
+    path: Assets/Scenes/MenuScenes/StartUpScene.unity
+    guid: 7795ca80527b9134b9efaf10c9d670b2
+  - enabled: 1
+    path: Assets/Scenes/MenuScenes/SinglePlayerStartUp.unity
+    guid: c5def27e06abf9246b98e645d6325e4d
+  m_configObjects: {}
