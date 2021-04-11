@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuScenes/SinglePlayerStartUp.unity
     guid: c5def27e06abf9246b98e645d6325e4d
+  - enabled: 1
+    path: Assets/Scenes/MenuScenes/SettingsScene.unity
+    guid: c3bb5593310fae947bf82572b7257468
   m_configObjects: {}

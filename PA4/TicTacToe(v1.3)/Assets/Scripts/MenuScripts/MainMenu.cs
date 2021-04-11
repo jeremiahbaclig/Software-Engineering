@@ -34,6 +34,10 @@ public class MainMenu : MonoBehaviour
         GridManager.single = true;
     }
 
+    public void SettingsMenu() {
+        SceneManager.LoadScene("SettingsScene");
+    }
+
     public void SubmitPressed()
     {
         if (GridManager.m < 2 || GridManager.n < 2 || GridManager.k < 2 ||
