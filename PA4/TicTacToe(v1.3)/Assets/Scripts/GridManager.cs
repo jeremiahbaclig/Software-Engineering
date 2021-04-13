@@ -616,29 +616,29 @@ public class GridManager : MonoBehaviour
 
                     for (int j = 0; j < n; j++)
                     {
+                        if (!String.IsNullOrEmpty(name))
+                            break;
+
                         if (boardState[i, j] != 0){
                             if (AdvancedCheckRight(i, j))
                             {
-                                y = j;
-                                j = j + 2;
-                                name = j + "," + i;
+                                x = i;
+                                y = j + 2;
+                                name = y + "," + x;
                                 break;
                             }
                             else if (AdvancedCheckDown(i, j))
                             {
-                                x = i;
-                                i = i + 2;
-                                name = j + "," + i;
+                                x = i + 2;
+                                y = j;
+                                name = y + "," + x;
                                 break;
                             }
                             else if (AdvancedCheckDiag(i, j))
                             {
-                                y = j;
-                                x = i;
-                                
-                                j = j + 2;
-                                i = i + 2;
-                                name = j + "," + i;
+                                x = i + 2;
+                                y = j + 2;
+                                name = y + "," + x;
                                 break;
                             }
                         }
@@ -693,30 +693,30 @@ public class GridManager : MonoBehaviour
 
                         for (int j = 0; j < n; j++)
                         {
+                            if (!String.IsNullOrEmpty(name))
+                                break;
+
                             if (boardState[i, j] != 0)
                             {
                                 if (AdvancedCheckRight(i, j))
                                 {
-                                    y = j;
-                                    j = j + 2;
-                                    name = j + "," + i;
+                                    x = i;
+                                    y = j + 2;
+                                    name = y + "," + x;
                                     break;
                                 }
                                 else if (AdvancedCheckDown(i, j))
                                 {
-                                    x = i;
-                                    i = i + 2;
-                                    name = j + "," + i;
+                                    x = i + 2;
+                                    y = j;
+                                    name = y + "," + x;
                                     break;
                                 }
                                 else if (AdvancedCheckDiag(i, j))
                                 {
-                                    y = j;
-                                    x = i;
-
-                                    j = j + 2;
-                                    i = i + 2;
-                                    name = j + "," + i;
+                                    x = i + 2;
+                                    y = j + 2;
+                                    name = y + "," + x;
                                     break;
                                 }
                             }
