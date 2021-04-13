@@ -503,7 +503,7 @@ public class GridManager : MonoBehaviour
                     }
                     catch
                     {
-
+                        //continue
                     }
 
                     break;
@@ -523,6 +523,214 @@ public class GridManager : MonoBehaviour
                     int x = rnd.Next(0, n);
                     int y = rnd.Next(0, m);
                     name = y + "," + x;
+                    pos = GameObject.Find(name).transform.position;
+
+                    if (boardState[x, y] == 0)
+                    {
+                        PlayerX(pos, name);
+                        int index = PlayerTurn();
+
+                        try
+                        {
+                            particle.PlayEffectsBlue(pos);
+                        }
+                        catch
+                        {
+                            //continue
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    public bool AdvancedCheckRight(int i, int j)
+    {
+        try
+        {
+            if (boardState[i, j] == boardState[i, j+1] && boardState[i,j+2] == 0)
+            {
+                return true;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    public bool AdvancedCheckDown(int i, int j)
+    {
+        try
+        {
+            if (boardState[i, j] == boardState[i+1, j] && boardState[i+2, j] == 0)
+            {
+                return true;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    public bool AdvancedCheckDiag(int i, int j)
+    {
+        try
+        {
+            if (boardState[i, j] == boardState[i+1, j+1] && boardState[i + 2, j+2] == 0)
+            {
+                return true;
+            }
+        }
+        catch
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    void AdvancedBot(Vector3 pos)
+    {
+        if (single && !cpuStart && CheckStarter.turn % 2 == 0)
+        {
+            System.Random rnd = new System.Random();
+
+            while (true)
+            {
+                string name = null;
+                int x = 0;
+                int y = 0;
+
+                for (int i = 0; i < m; i++)
+                {
+                    if (!String.IsNullOrEmpty(name))
+                        break;
+
+                    for (int j = 0; j < n; j++)
+                    {
+                        if (boardState[i, j] != 0){
+                            if (AdvancedCheckRight(i, j))
+                            {
+                                y = j;
+                                j = j + 2;
+                                name = j + "," + i;
+                                break;
+                            }
+                            else if (AdvancedCheckDown(i, j))
+                            {
+                                x = i;
+                                i = i + 2;
+                                name = j + "," + i;
+                                break;
+                            }
+                            else if (AdvancedCheckDiag(i, j))
+                            {
+                                y = j;
+                                x = i;
+                                
+                                j = j + 2;
+                                i = i + 2;
+                                name = j + "," + i;
+                                break;
+                            }
+                        }
+                    }
+                }
+                
+                if (String.IsNullOrEmpty(name))
+                {
+                    x = rnd.Next(0, n);
+                    y = rnd.Next(0, m);
+                    name = y + "," + x;
+                }
+
+                pos = GameObject.Find(name).transform.position;
+
+                if (boardState[x, y] == 0)
+                {
+                    PlayerO(pos, name);
+                    int index = PlayerTurn();
+
+                    try
+                    {
+                        particle.PlayEffectsRed(pos);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    break;
+                }
+            }
+        }
+        else if (single && cpuStart)
+        {
+            if (CheckStarter.turn == 0)
+                CheckStarter.turn++;
+            if (CheckStarter.turn % 2 == 1)
+            {
+                System.Random rnd = new System.Random();
+
+                while (true)
+                {
+                    string name = null;
+                    int x = 0;
+                    int y = 0;
+
+                    for (int i = 0; i < m; i++)
+                    {
+                        if (!String.IsNullOrEmpty(name))
+                            break;
+
+                        for (int j = 0; j < n; j++)
+                        {
+                            if (boardState[i, j] != 0)
+                            {
+                                if (AdvancedCheckRight(i, j))
+                                {
+                                    y = j;
+                                    j = j + 2;
+                                    name = j + "," + i;
+                                    break;
+                                }
+                                else if (AdvancedCheckDown(i, j))
+                                {
+                                    x = i;
+                                    i = i + 2;
+                                    name = j + "," + i;
+                                    break;
+                                }
+                                else if (AdvancedCheckDiag(i, j))
+                                {
+                                    y = j;
+                                    x = i;
+
+                                    j = j + 2;
+                                    i = i + 2;
+                                    name = j + "," + i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (String.IsNullOrEmpty(name))
+                    {
+                        x = rnd.Next(0, n);
+                        y = rnd.Next(0, m);
+                        name = y + "," + x;
+                    }
+
+
                     pos = GameObject.Find(name).transform.position;
 
                     if (boardState[x, y] == 0)
