@@ -17,10 +17,19 @@ public class CheckStarter : MonoBehaviour
             turn = 0;
             GridManager.cpuStart = true;
         }
-        else if (GameObject.FindGameObjectsWithTag("Respawn_X")[0].GetComponent<Toggle>().isOn == true)
+        else if (GameObject.FindGameObjectsWithTag("RespawnX")[0].GetComponent<Toggle>().isOn == true)
         {
             turn = 1;
             GridManager.cpuStart = false;
+        }
+
+        if (GameObject.FindGameObjectsWithTag("DifficultyBasic")[0].GetComponent<Toggle>().isOn == true)
+        {
+            GridManager.cpuBasic = true;
+        }
+        else if (GameObject.FindGameObjectsWithTag("DifficultyAdvanced")[0].GetComponent<Toggle>().isOn == true)
+        {
+            GridManager.cpuBasic = false;
         }
     }
 }

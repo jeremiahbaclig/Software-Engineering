@@ -37,6 +37,21 @@ public class MainMenu : MonoBehaviour
     public void SettingsMenu() {
         SceneManager.LoadScene("SettingsScene");
     }
+    
+    public void ThemeOriginal()
+    {
+        // make reference calls to concrete classes that inherit from interface
+    }
+
+    public void ThemeOne()
+    {
+        // I think adjusting the hue in post-processing would be good enough??
+    }
+
+    public void ThemeTwo()
+    {
+
+    }
 
     public void SubmitPressed()
     {

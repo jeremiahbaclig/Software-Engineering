@@ -1416,7 +1416,7 @@ GameObject:
   - component: {fileID: 670274845}
   m_Layer: 5
   m_Name: AdvancedOption
-  m_TagString: Respawn
+  m_TagString: DifficultyAdvanced
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1553,7 +1553,7 @@ GameObject:
   - component: {fileID: 718951717}
   m_Layer: 5
   m_Name: X_Option
-  m_TagString: Respawn_X
+  m_TagString: RespawnX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3158,7 +3158,7 @@ GameObject:
   - component: {fileID: 1673071164}
   m_Layer: 5
   m_Name: BasicOption
-  m_TagString: Respawn_X
+  m_TagString: DifficultyBasic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3389,7 +3389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.85882354, g: 0.49803922, b: 0.2, a: 1}
+  m_Color: {r: 0.85882354, g: 0.2, b: 0.36862746, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:

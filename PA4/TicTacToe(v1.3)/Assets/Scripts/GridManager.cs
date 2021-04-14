@@ -19,6 +19,7 @@ public class GridManager : MonoBehaviour
     public static int k = 3;
     public static bool single = true;
     public static bool cpuStart = false;
+    public static bool cpuBasic = false;
 
     int[,] boardState;
     public bool gameOver = false;
@@ -797,7 +798,15 @@ public class GridManager : MonoBehaviour
     {
         Vector3 pos = new Vector3(0, 0, 0);
 
-        EasyBot(pos);
+        if (cpuBasic == true)
+        {
+            EasyBot(pos);
+        }
+        else
+        {
+            AdvancedBot(pos);
+        }
+        
         
         if (Input.GetMouseButtonDown(0))
         {
