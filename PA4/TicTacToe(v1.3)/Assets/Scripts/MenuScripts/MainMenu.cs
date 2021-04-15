@@ -41,16 +41,18 @@ public class MainMenu : MonoBehaviour
     public void ThemeOriginal()
     {
         // make reference calls to concrete classes that inherit from interface
+        // concrete classes need to have applyTheme() that applies that colorProfile to ALL scenes
+        // theme.applyTheme("original");
     }
 
     public void ThemeOne()
     {
-        // I think adjusting the hue in post-processing would be good enough??
+        // theme.applyTheme("pink");
     }
 
     public void ThemeTwo()
     {
-
+        // theme.applyTheme("purple");
     }
 
     public void SubmitPressed()
