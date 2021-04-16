@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoverageReport scope="Summary">
+  <Summary>
+    <Generatedon>4/16/2021 - 2:13:01 PM</Generatedon>
+    <Parser>OpenCoverParser</Parser>
+    <Assemblies>2</Assemblies>
+    <Classes>9</Classes>
+    <Files>9</Files>
+    <Coveredlines>440</Coveredlines>
+    <Uncoveredlines>438</Uncoveredlines>
+    <Coverablelines>878</Coverablelines>
+    <Totallines>1298</Totallines>
+    <Linecoverage>50.1</Linecoverage>
+    <Coveredbranches>0</Coveredbranches>
+    <Totalbranches>0</Totalbranches>
+  </Summary>
+  <Coverage>
+    <Assembly name="GridManagerAssembly" classes="8" coverage="42.4" coveredlines="321" coverablelines="756" totallines="1099" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="CheckStarter" coverage="4.1" coveredlines="1" coverablelines="24" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="EndGame" coverage="0" coveredlines="0" coverablelines="8" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="GameTimer" coverage="0" coveredlines="0" coverablelines="23" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="GridManager" coverage="51.8" coveredlines="307" coverablelines="592" totallines="818" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="MainMenu" coverage="0" coveredlines="0" coverablelines="75" totallines="116" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Particles" coverage="0" coveredlines="0" coverablelines="8" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="Scene" coverage="0" coveredlines="0" coverablelines="2" totallines="12" branchcoverage="" coveredbranches="0" totalbranches="0" />
+      <Class name="SoundManager" coverage="54.1" coveredlines="13" coverablelines="24" totallines="43" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    </Assembly>
+    <Assembly name="Tests" classes="1" coverage="97.5" coveredlines="119" coverablelines="122" totallines="199" branchcoverage="" coveredbranches="0" totalbranches="0">
+      <Class name="Tests.TestSuite" coverage="97.5" coveredlines="119" coverablelines="122" totallines="199" branchcoverage="" coveredbranches="0" totalbranches="0" />
+    </Assembly>
+  </Coverage>
+</CoverageReport>
