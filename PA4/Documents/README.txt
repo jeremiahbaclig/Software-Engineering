@@ -1,21 +1,22 @@
+README
+
 TIC TAC TOE (v1.3) - Program Description
 
-This program is a game that allows two users to play tic tac toe locally or a single player to play against an 
-easy or advanced bot.
+This program is a game that allows two users to play tic tac toe locally.
 Running the game requires Unity to be installed.
 
 
 Downloading Unity to run the Game:
 
-1. Go to https://unity3d.com/get-unity/download and click "download Unity hub".
+1. Go to https://unity3d.com/get-unity/download and click "download Unity hub"
 
 2. Once downloaded, open Unity. On the leftmost column, click "Installs", click "add". Find and install
-   2019.4.21f1 (should be the recommended release).
+   2019.4.21f1 (should be the recommended release)
 
 3. Once finished, click on "Projects" on the leftmost column and click "add". Find corresponding project folder
-   named TicTacToe(v1.1).
+   named TicTacToe(v1.1)
 
-4. After added, click to open the project.
+4. After added, click to open the project
 
 
 Running the Game:
@@ -31,7 +32,7 @@ Running the Game:
 
 Running the Unit Tests:
 
-1. Click "Window" > "General" in the drop down menu > Then click "Test Runner".
+1. Click "Window" > "General" in the drop down menu > Then click "Test Runner"
 
 2. In the "Test Runner" window, select "PlayMode" in which you should see all the name of the various test cases.
 
@@ -41,3 +42,8 @@ Running the Unit Tests:
 
 
 *NOTE: All code are contained inside the "Tests" and "Scripts" folders, which are inside the "Assets" folder
+
+
+
+
+Project Strengths and Weaknesses

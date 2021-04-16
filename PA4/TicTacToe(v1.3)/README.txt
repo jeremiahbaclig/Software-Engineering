@@ -1,3 +1,5 @@
+README
+
 TIC TAC TOE (v1.3) - Program Description
 
 This program is a game that allows two users to play tic tac toe locally.
@@ -40,3 +42,8 @@ Running the Unit Tests:
 
 
 *NOTE: All code are contained inside the "Tests" and "Scripts" folders, which are inside the "Assets" folder
+
+
+
+
+Project Strengths and Weaknesses
