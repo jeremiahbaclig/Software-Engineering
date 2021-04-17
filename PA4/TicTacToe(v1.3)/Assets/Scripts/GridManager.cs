@@ -653,7 +653,11 @@ public class GridManager : MonoBehaviour
                     name = y + "," + x;
                 }
 
-                pos = GameObject.Find(name).transform.position;
+                try
+                {
+                    pos = GameObject.Find(name).transform.position;
+                }
+                catch(NullReferenceException e) { }
 
                 if (boardState[x, y] == 0)
                 {
@@ -732,7 +736,11 @@ public class GridManager : MonoBehaviour
                     }
 
 
-                    pos = GameObject.Find(name).transform.position;
+                    try
+                    {
+                        pos = GameObject.Find(name).transform.position;
+                    }
+                    catch (NullReferenceException e) { }
 
                     if (boardState[x, y] == 0)
                     {
