@@ -32,10 +32,10 @@ public class Scene : MonoBehaviour, SceneFactory
                 background.color = new Color(1, 1, 1, 1);
                 break;
             case 1:
-                background.color = new Color(1, 0.1f, 0.2f, 1);
+                background.color = new Color(1, 0.3f, 0.4f, 1);
                 break;
             case 2:
-                background.color = new Color(0.1f, 0.4f, 0.2f, 1);
+                background.color = new Color(0.1f, 0.6f, 0.4f, 1);
                 break;
             default:
                 break;
