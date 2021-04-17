@@ -6,6 +6,8 @@ using UnityEditor;
 
 public class MainMenu : MonoBehaviour
 {
+    private Scene scene = new Scene();
+    public static int currentTheme;
     public void ExitGame() {
         SoundManager.PlaySound("select_no");
         Debug.Log("Exiting Game");
@@ -40,19 +42,17 @@ public class MainMenu : MonoBehaviour
     
     public void ThemeOriginal()
     {
-        // make reference calls to concrete classes that inherit from interface
-        // concrete classes need to have applyTheme() that applies that colorProfile to ALL scenes
-        // theme.applyTheme("original");
+        MainMenu.currentTheme = 0;
     }
 
     public void ThemeOne()
     {
-        // theme.applyTheme("pink");
+        MainMenu.currentTheme = 1;
     }
 
     public void ThemeTwo()
     {
-        // theme.applyTheme("purple");
+        MainMenu.currentTheme = 2;
     }
 
     public void SubmitPressed()

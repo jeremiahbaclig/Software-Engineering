@@ -295,12 +295,12 @@ public class GridManager : MonoBehaviour
                 //Checks to see if the the space is empty or not a continuation, then resets the counter
                 if (counter > 0 && currentSpace != 1)
                 {
-                    Debug.Log("Line: " + i + " Space: " + j + " Counter had X's but encountered a non X");
+                    // Debug.Log("Line: " + i + " Space: " + j + " Counter had X's but encountered a non X");
                     counter = 0;
                 }
                 else if (counter < 0 && currentSpace != -1)
                 {
-                    Debug.Log("Line: " + i + " Space: " + j + " Counter had Y's but encountered a non Y");
+                    // Debug.Log("Line: " + i + " Space: " + j + " Counter had Y's but encountered a non Y");
                     counter = 0;
                 }
 
@@ -308,24 +308,24 @@ public class GridManager : MonoBehaviour
                 if (currentSpace == 1)
                 {
                     counter += 1;
-                    Debug.Log("Counter Added. It is now: " + counter);
+                    // Debug.Log("Counter Added. It is now: " + counter);
                 }
                 else if (currentSpace == -1)
                 {
                     counter -= 1;
-                    Debug.Log("Counter Subtracted. It is now: " + counter);
+                    // Debug.Log("Counter Subtracted. It is now: " + counter);
                 }
 
                 //Checks to see if the the space is empty or not a continuation, then resets the counter
                 if (counter == k)
                 {
-                    Debug.Log("Line: " + i + " Vertical Win for X!");
+                    // Debug.Log("Line: " + i + " Vertical Win for X!");
                     winner = 1;
                     return true;
                 }
                 else if (counter == -k)
                 {
-                    Debug.Log("Line: " + i + " Vertical Win for O!");
+                    // Debug.Log("Line: " + i + " Vertical Win for O!");
                     winner = -1;
                     return true;
                 }
@@ -366,13 +366,13 @@ public class GridManager : MonoBehaviour
                 //Checks to see if the the counter is at it's "Win Size"
                 if (counter == k)
                 {
-                    Debug.Log("Column: " + i + " Horizontal Win for X!");
+                    // Debug.Log("Column: " + i + " Horizontal Win for X!");
                     winner = 1;
                     return true;
                 }
                 else if (counter == -k)
                 {
-                    Debug.Log("Column: " + i + " Horizontal Win for O!");
+                    // Debug.Log("Column: " + i + " Horizontal Win for O!");
                     winner = -1;
                     return true;
                 }
@@ -387,7 +387,7 @@ public class GridManager : MonoBehaviour
                 counter = 0;
                 if (checkDiag(i, j, ref counter))
                 {
-                    Debug.Log("Starting at: " + i + "," + j + " Diagonal Win for " + boardState[i, j] + "!");
+                    // Debug.Log("Starting at: " + i + "," + j + " Diagonal Win for " + boardState[i, j] + "!");
                     winner = boardState[i,j];
                     return true;
                 }
@@ -402,7 +402,7 @@ public class GridManager : MonoBehaviour
                 counter = 0;
                 if (checkCounterDiag(i, j, ref counter))
                 {
-                    Debug.Log("Starting at: " + i + "," + j + " Counter Diagonal Win for " + boardState[i,j] + "!");
+                    // Debug.Log("Starting at: " + i + "," + j + " Counter Diagonal Win for " + boardState[i,j] + "!");
                     winner = boardState[i,j];
                     return true;
                 }
